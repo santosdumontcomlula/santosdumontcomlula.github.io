@@ -55,8 +55,8 @@ button,select,input,textarea{font:inherit;color:inherit}
 /* topo: foto da Torre de Santos Dumont + logo */
 .stripe{height:8px;background:linear-gradient(90deg,var(--brand-red) 0 60%,var(--yellow) 60% 80%,var(--brand-green) 80% 100%)}
 header.hero{position:relative;overflow:hidden;background:#120E1C;color:#FFFFFF}
-header.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;max-width:none}
-header.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,10,22,.35) 0%,rgba(14,10,22,.55) 45%,rgba(14,10,22,.92) 100%)}
+header.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;max-width:none}
+header.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,10,22,.25) 0%,rgba(14,10,22,.45) 40%,rgba(14,10,22,.9) 100%)}
 header.hero .wrap{position:relative;z-index:1;padding-block:20px 22px}
 .hero .logo{display:block;width:clamp(150px,34vw,230px);height:auto;filter:drop-shadow(0 6px 18px rgba(0,0,0,.45))}
 .eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
@@ -71,7 +71,9 @@ h1 em{font-style:normal;color:var(--yellow)}
 .photo img{display:block;width:100%;height:clamp(150px,30vw,260px);object-fit:cover}
 .photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 14px 10px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.75));color:#FFFFFF;font-size:13px;font-weight:600}
 .cta .photo{margin:-20px -20px 4px;border-radius:var(--r) var(--r) 0 0}
-.cta .photo img{object-position:50% 66%;height:clamp(190px,34vw,300px)}
+.cta .photo img{object-position:50% 50%;height:clamp(200px,36vw,320px)}
+.pstat img{object-position:30% 22%;height:clamp(180px,34vw,300px)}
+#focar .photo img{object-position:50% 45%}
 /* galeria */
 .gal{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;-webkit-overflow-scrolling:touch}
 .gal a{flex:0 0 clamp(118px,30%,170px);scroll-snap-align:start;display:block;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--chip)}
@@ -254,7 +256,7 @@ footer ul{padding-left:18px;margin:6px 0}
 <body>
 <div class="stripe"></div>
 <header class="hero">
-  <img class="bg" src="torre.jpg" alt="" fetchpriority="high">
+  <picture><source media="(min-width:700px)" srcset="igreja-larga.jpg"><img class="bg" src="igreja.jpg" alt="" fetchpriority="high"></picture>
   <div class="wrap">
     <img class="logo" src="logo.png" alt="Santos Dumont 13 com Lula" width="560" height="366">
     <div class="eyebrow">@santosdumontcomlula · dados oficiais do TSE</div>
@@ -262,7 +264,7 @@ footer ul{padding-left:18px;margin:6px 0}
     <p class="lede">Argumentos com fonte, o resultado do 1º turno seção por seção e o kit pra virar voto até o dia 25.</p>
     <div class="countdown" id="countdown">2º turno: 25 de outubro</div>
   </div>
-  <span class="credit">Réplica da Torre Eiffel · Santos Dumont</span>
+  <span class="credit">Praça e igreja · Santos Dumont</span>
 </header>
 
 <nav class="tabs" aria-label="Seções da página"><div class="wrap" role="tablist">
@@ -316,6 +318,7 @@ footer ul{padding-left:18px;margin:6px 0}
 
 <!-- ============ RESULTADO ============ -->
 <section class="view" id="resultado" role="tabpanel" aria-labelledby="t-resultado" hidden>
+  <figure class="photo pstat" style="margin:0"><img src="estatua.jpg" alt="Estátua de Santos Dumont sentado num banco da praça" loading="lazy"><figcaption>Santos Dumont, seção por seção: o resultado oficial do 1º turno.</figcaption></figure>
   <div class="card" id="filtros">
     <div class="filters">
       <div class="field"><label for="f-bairro">Bairro</label><select id="f-bairro"></select></div>
@@ -370,7 +373,7 @@ footer ul{padding-left:18px;margin:6px 0}
 
 <!-- ============ ONDE FOCAR ============ -->
 <section class="view" id="focar" role="tabpanel" aria-labelledby="t-focar" hidden>
-  <figure class="photo" style="margin:0"><img src="escola.jpg" alt="Escola de Santos Dumont que funciona como local de votação" loading="lazy"><figcaption>Em Santos Dumont, a eleição acontece em 53 locais: escolas, clubes e salões dos bairros.</figcaption></figure>
+  <figure class="photo" style="margin:0"><img src="praca.jpg" alt="Vista do centro de Santos Dumont, com a praça, a igreja e o prédio histórico" loading="lazy"><figcaption>Quase 6 em cada 10 eleitores votam em locais do Centro. A eleição acontece em 53 locais da cidade.</figcaption></figure>
   <div class="card">
     <h2>O tamanho do jogo</h2>
     <div class="facts" id="facts"></div>
@@ -388,7 +391,7 @@ footer ul{padding-left:18px;margin:6px 0}
 <!-- ============ VIRAR VOTO ============ -->
 <section class="view" id="virar" role="tabpanel" aria-labelledby="t-virar" hidden>
   <div class="cta">
-    <figure class="photo" style="margin-bottom:4px"><img src="ato.jpg" alt="Apoiadores do Lula com bandeiras nas ruas de Santos Dumont" loading="lazy"><figcaption>Militância nas ruas de Santos Dumont</figcaption></figure>
+    <figure class="photo" style="margin-bottom:4px"><img src="militancia.jpg" alt="Apoiadora sorrindo com a bandeira do Lula 13 em frente à igreja" loading="lazy"><figcaption>Militância nas ruas de Santos Dumont</figcaption></figure>
     <h2>Travou na conversa? Me chama que eu te ajudo!</h2>
     <p>Manda no direct a dúvida ou a desculpa que você ouviu. A gente responde com dado oficial.</p>
     <div class="btnrow"><a class="btn light" href="https://ig.me/m/santosdumontcomlula" target="_blank" rel="noopener">Chamar no direct</a><span style="align-self:center;font-weight:600">@santosdumontcomlula</span></div>
