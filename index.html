@@ -71,9 +71,9 @@ h1 em{font-style:normal;color:var(--yellow)}
 .photo img{display:block;width:100%;height:clamp(150px,30vw,260px);object-fit:cover}
 .photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 14px 10px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.75));color:#FFFFFF;font-size:13px;font-weight:600}
 .cta .photo{margin:-20px -20px 4px;border-radius:var(--r) var(--r) 0 0}
-.cta .photo img{object-position:50% 50%;height:clamp(200px,36vw,320px)}
+.cta .photo img{object-position:50% 66%;height:clamp(200px,36vw,320px)}
 .pstat img{object-position:30% 22%;height:clamp(180px,34vw,300px)}
-#focar .photo img{object-position:50% 45%}
+#focar .photo img{object-position:50% 45%;height:clamp(200px,38vw,340px)}
 /* galeria */
 .gal{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;-webkit-overflow-scrolling:touch}
 .gal a{flex:0 0 clamp(118px,30%,170px);scroll-snap-align:start;display:block;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--chip)}
@@ -256,7 +256,7 @@ footer ul{padding-left:18px;margin:6px 0}
 <body>
 <div class="stripe"></div>
 <header class="hero">
-  <picture><source media="(min-width:700px)" srcset="igreja-larga.jpg"><img class="bg" src="igreja.jpg" alt="" fetchpriority="high"></picture>
+  <img class="bg" src="igreja-larga.jpg" alt="" fetchpriority="high">
   <div class="wrap">
     <img class="logo" src="logo.png" alt="Santos Dumont 13 com Lula" width="560" height="366">
     <div class="eyebrow">@santosdumontcomlula · dados oficiais do TSE</div>
@@ -373,7 +373,7 @@ footer ul{padding-left:18px;margin:6px 0}
 
 <!-- ============ ONDE FOCAR ============ -->
 <section class="view" id="focar" role="tabpanel" aria-labelledby="t-focar" hidden>
-  <figure class="photo" style="margin:0"><img src="praca.jpg" alt="Vista do centro de Santos Dumont, com a praça, a igreja e o prédio histórico" loading="lazy"><figcaption>Quase 6 em cada 10 eleitores votam em locais do Centro. A eleição acontece em 53 locais da cidade.</figcaption></figure>
+  <figure class="photo" style="margin:0"><img src="praca-igreja.jpg" alt="Praça de Santos Dumont com a igreja ao fundo" loading="lazy"><figcaption>Quase 6 em cada 10 eleitores votam em locais do Centro. A eleição acontece em 53 locais da cidade.</figcaption></figure>
   <div class="card">
     <h2>O tamanho do jogo</h2>
     <div class="facts" id="facts"></div>
@@ -391,7 +391,7 @@ footer ul{padding-left:18px;margin:6px 0}
 <!-- ============ VIRAR VOTO ============ -->
 <section class="view" id="virar" role="tabpanel" aria-labelledby="t-virar" hidden>
   <div class="cta">
-    <figure class="photo" style="margin-bottom:4px"><img src="militancia.jpg" alt="Apoiadora sorrindo com a bandeira do Lula 13 em frente à igreja" loading="lazy"><figcaption>Militância nas ruas de Santos Dumont</figcaption></figure>
+    <figure class="photo" style="margin-bottom:4px"><img src="ato.jpg" alt="Apoiadores do Lula com bandeiras nas ruas de Santos Dumont" loading="lazy"><figcaption>Militância nas ruas de Santos Dumont</figcaption></figure>
     <h2>Travou na conversa? Me chama que eu te ajudo!</h2>
     <p>Manda no direct a dúvida ou a desculpa que você ouviu. A gente responde com dado oficial.</p>
     <div class="btnrow"><a class="btn light" href="https://ig.me/m/santosdumontcomlula" target="_blank" rel="noopener">Chamar no direct</a><span style="align-self:center;font-weight:600">@santosdumontcomlula</span></div>
