@@ -129,10 +129,6 @@ nav.tabs .mainrow{padding-block:10px}
 .intro h2{font-size:30px}
 .warn{background:var(--chip);border-left:4px solid var(--yellow);border-radius:10px;padding:10px 12px;font-size:14px}
 .empty{padding:18px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r)}
-.boatos{display:grid;gap:8px;margin-top:10px}
-.boato{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;font-size:14px}
-.boato b.f{background:var(--bad);color:#FFFFFF;border-radius:6px;padding:2px 7px;font-size:11.5px;letter-spacing:.04em}
-.boato b.n{background:var(--other);color:#FFFFFF;border-radius:6px;padding:2px 7px;font-size:11.5px;letter-spacing:.04em}
 main{padding-block:18px 40px}
 section.view{display:flex;flex-direction:column;gap:18px}
 
@@ -304,21 +300,15 @@ footer ul{padding-left:18px;margin:6px 0}
 <section class="view" id="flavio" role="tabpanel" aria-labelledby="t-flavio" hidden>
   <div class="card intro">
     <h2>Flávio: o que pesa</h2>
-    <p style="margin:0">O que ele defende, o que a campanha dele propõe e o que ele não explica. Tudo com fonte.</p>
+    <p style="margin:0">O que ele defende, o que a campanha dele propõe, o que ele não explica e como foi o governo do pai. Tudo com fonte.</p>
     <div class="warn">Só fato com fonte. Sem xingar e sem montagem: boato é crime eleitoral e derruba a confiança em quem compartilha.</div>
     <div class="argtools" style="margin-top:6px">
-      <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input id="q-flavio" type="search" placeholder="Buscar: trabalho, aposentadoria, SUS, indulto…" aria-label="Buscar fatos sobre Flávio Bolsonaro" autocomplete="off"></div>
+      <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input id="q-flavio" type="search" placeholder="Buscar: trabalho, pandemia, remédio, Milei…" aria-label="Buscar fatos sobre Flávio Bolsonaro" autocomplete="off"></div>
       <div class="chips" id="tags-flavio" role="group" aria-label="Filtrar por tema"></div>
       <div class="count" id="count-flavio"></div>
     </div>
   </div>
   <div class="args" id="args-flavio"></div>
-  <div class="card">
-    <h2>Boatos: não compartilhe</h2>
-    <p class="hint">Isso circula por aí, mas não é verdade ou não está no plano dele. Repetir só ajuda o outro lado a desmentir a gente.</p>
-    <div class="boatos" id="boatos"></div>
-    <p class="src" style="margin-top:10px">Fontes: plano de governo registrado no TSE, conferido pela Jovem Pan (07/10/2026); votação da PEC 221/2019 no Senado (14/10/2026).</p>
-  </div>
 </section>
 
 <!-- ============ RESULTADO ============ -->
@@ -436,9 +426,10 @@ footer ul{padding-left:18px;margin:6px 0}
         <p>Desde fevereiro de 2025, os <b>41 remédios</b> da Farmácia Popular são de graça, como os de pressão, diabetes e asma. É só levar a receita e o documento numa farmácia credenciada. O programa foi criado pelo Lula em 2004.</p>
         <p class="src">Fonte: Ministério da Saúde</p></div></details>
       <details class="obj"><summary>“O Flávio também votou pelo fim da 6x1.”</summary><div class="ans">
-        <p>Votou, e isso é bom. A PEC aprovada no Senado em 14/10 reduz a jornada de 44 pra 40 horas, com 2 folgas por semana e sem cortar salário.</p>
+        <p>Votou, mas de longe: não foi ao Senado e votou pelo sistema remoto, em dia de campanha no Rio Grande do Sul. Antes, criticava o texto. Só anunciou o voto na véspera, em 13/10, depois de ser cobrado pelo Lula.</p>
+        <p>A PEC aprovada em 14/10 reduz a jornada de 44 pra 40 horas, com 2 folgas por semana e sem cortar salário.</p>
         <p>Mas o Flávio assina a PEC 12/2026, do coordenador da campanha dele, que cria o <b>trabalho pago por hora</b>: férias, 13º e FGTS proporcionais às horas, sem garantia de 2 folgas.</p>
-        <p class="src">Fontes: Senado Notícias (14/10/2026); Exame (15/10/2026); Congresso em Foco (06/10/2026)</p></div></details>
+        <p class="src">Fontes: CNN Brasil (14/10/2026); Correio da Manhã (13/10/2026); Senado Notícias (14/10/2026); Congresso em Foco (06/10/2026)</p></div></details>
       <details class="obj"><summary>“Tá tudo caro no mercado.”</summary><div class="ans">
         <p>O salário mínimo voltou a subir acima da inflação todo ano, por lei. E a reforma tributária aprovada no governo Lula zera os impostos sobre os alimentos da cesta básica nacional, com transição até 2033.</p>
         <p class="src">Fontes: Lei 14.663/2023; Lei Complementar 214/2025</p></div></details>
@@ -678,6 +669,7 @@ document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{sho
 // argumentos (Por que Lula / Flávio)
 const P360='https://www.poder360.com.br/poder-eleicoes-2026/o-que-se-sabe-sobre-o-plano-economico-de-flavio-bolsonaro/';
 const BPM='https://bpmoney.com.br/politica/escala-6x1-quem-votou-contra-senadores/';
+const CNN6='https://cnnbrasil.com.br/eleicoes/flavio-bolsonaro-vota-a-distancia-pelo-fim-da-escala-6x1';
 const DIE='https://www.dieese.org.br/outraspublicacoes/2023/notaEspecialSM_2_042023.pdf';
 const ARGS={
 lula:[
@@ -697,21 +689,18 @@ lula:[
  {t:'Carteira de motorista mais barata',n:'até 80%',x:'Segundo o governo, as novas regras de dezembro de 2025 deixaram a CNH até 80% mais barata.',tags:['Dinheiro no bolso','Trabalho'],f:[['Governo federal (12/2025)']]}
 ],
 flavio:[
- {t:'Trabalho pago por hora',n:'PEC 12',x:'Ele votou pelo fim da 6x1, mas assina e defende a PEC 12/2026, do coordenador da campanha dele. Ela cria o pagamento por hora trabalhada, com salário e direitos proporcionais às horas e <b>sem garantia de 2 dias de descanso</b> por semana.',q:'“Quem quer trabalhar mais, vai trabalhar mais.” (Flávio, 06/10/2026)',tags:['Trabalho'],f:[['Congresso em Foco (06/10/2026)','https://www.congressoemfoco.com.br/noticia/123034/flavio-defende-trabalho-por-hora-como-alternativa-ao-fim-da-escala-6x1'],['Votação da 6x1, BPMoney (14/10/2026)',BPM]]},
+ {t:'Trabalho pago por hora',n:'PEC 12',x:'Ele votou pelo fim da 6x1, mas de longe e só depois de anunciar o voto na véspera. E assina e defende a PEC 12/2026, do coordenador da campanha dele. Ela cria o pagamento por hora trabalhada, com salário e direitos proporcionais às horas e <b>sem garantia de 2 dias de descanso</b> por semana.',q:'“Quem quer trabalhar mais, vai trabalhar mais.” (Flávio, 06/10/2026)',tags:['Trabalho'],f:[['Congresso em Foco (06/10/2026)','https://www.congressoemfoco.com.br/noticia/123034/flavio-defende-trabalho-por-hora-como-alternativa-ao-fim-da-escala-6x1'],['Votação da 6x1, CNN Brasil (14/10/2026)',CNN6]]},
  {t:'Mexer de novo na aposentadoria e na CLT',n:'',x:'O coordenador da campanha, senador Rogério Marinho, disse que vai “revisitar” a Previdência e a reforma trabalhista. Flávio promete manter o reajuste das aposentadorias acima da inflação, mas não explicou o que mudaria na Previdência.',q:'“A gente vai ter que revisitar a Previdência.” “A trabalhista tem que ser revisitada.” (Rogério Marinho, março de 2026)',tags:['Aposentados','Trabalho'],f:[['Gazeta do Povo, entrevista à Folha (06/03/2026)','https://www.gazetadopovo.com.br/republica/flavio-bolsonaro-nova-reforma-previdencia-retomar-trabalhista/'],['Poder360 (13/10/2026)',P360]]},
+ {t:'O modelo é o Milei',n:'32,3%',x:'Milei foi à convenção do PL que lançou o Flávio, em julho, e lá chamou o Lula de “presidiário”. A coordenadora econômica da campanha diz que se inspira no governo dele. Nas cidades da Argentina de Milei, a pobreza <b>voltou a subir</b> em 2026: 32,3% da população, 9,7 milhões de pessoas. 2,2 milhões não têm renda nem pra comprar a comida básica, e o desemprego é o maior desde 2021.',q:'“Usando um pouco de inspiração no que foi feito no governo do Javier Milei na Argentina.” (Daniella Marques, coordenadora econômica de Flávio, 14/09/2026)',tags:['Economia','Família'],f:[['O Povo (27/07/2026)','https://www.opovo.com.br/noticias/politica/2026/07/27/amp/milei-na-convencao-do-pl-e-mais-negativo-do-que-positivo-para-flavio-bolsonaro-aponta-pesquisa.html'],['A Tarde, com dados do INDEC (09/2026)','https://atarde.com.br/eleicoes/inspiracao-para-flavio-economia-da-argentina-tem-32-de-populacao-na-pobreza-1403545'],['INDEC, via Forbes Argentina (24/09/2026)','https://www.forbesargentina.com/today/la-pobreza-subio-323-primer-semestre-2026-afecta-casi-10-millones-personas-n98687']]},
  {t:'Prioridade: perdoar o pai',n:'27 anos',x:'Jair Bolsonaro foi condenado pelo STF em 2025 a 27 anos de prisão por liderar a tentativa de golpe. Flávio promete anistia “ampla, geral e irrestrita” e, se não sair, um indulto ao pai.',q:'Sobre o julgamento do pai: “uma grande farsa”.',tags:['Democracia'],f:[['Euronews, entrevista à TV Globo (29/08/2026)','https://pt.euronews.com/2026/08/29/filho-de-bolsonaro-insiste-que-julgamento-do-pai-foi-uma-farsa-e-que-lhe-concedera-um-indu']]},
  {t:'Corte de gastos sem dizer onde',n:'?',x:'O plano promete um “tesouraço” de corte de gastos, mas não diz quanto, onde, nem se atinge benefícios sociais. Um assessor econômico da campanha apresentou corte de até R$ 250 bilhões no Orçamento. A campanha diz que essa não é a posição oficial.',tags:['Economia','Dinheiro no bolso'],f:[['Poder360 (13/10/2026)',P360]]},
  {t:'Rever a reforma tributária',n:'',x:'O plano registrado no TSE propõe rever a reforma tributária aprovada no governo Lula, sem dizer qual seria a nova alíquota. É essa reforma que zera o imposto da cesta básica.',tags:['Dinheiro no bolso','Economia'],f:[['Poder360 (13/10/2026)',P360],['Lei Complementar 214/2025']]},
  {t:'Privatizar ou não?',n:'',x:'O plano no TSE prevê retomar o Programa Nacional de Desestatização, sem listar empresas. Dias depois, o coordenador econômico Adolfo Sachsida disse que “não existirão privatizações de empresas”. Qual dos dois vale?',tags:['Economia'],f:[['Poder360 (13/10/2026)',P360],['Forbes Brasil (08/10/2026)','https://forbes.com.br/forbes-money/2026/10/petrobras-bb-e-caixa-serao-privatizados-veja-o-que-diz-coordenador-de-flavio-bolsonaro/']]},
  {t:'Prontuário do SUS com hospital privado',n:'',x:'O plano propõe compartilhar os prontuários dos pacientes do SUS, com os dados pessoais, com hospitais privados.',tags:['Saúde'],f:[['Agência Brasil (18/09/2026)','https://agenciabrasil.ebc.com.br/politica/noticia/2026-09/flavio-bolsonaro-propoe-enxugar-estado-e-endurecer-acoes-de-seguranca']]},
- {t:'O governo que ele defende',n:'',x:'No governo Bolsonaro, o salário mínimo teve reajustes praticamente sem aumento real de 2020 a 2022, e o Brasil voltou ao Mapa da Fome da ONU no relatório de 2022.',tags:['Dinheiro no bolso','Família'],f:[['DIEESE (2023)',DIE],['FAO/ONU, relatório SOFI de 2022']]}
+ {t:'Pandemia: vacina atrasada',n:'700 mil',x:'O Brasil chegou a <b>700 mil mortes</b> por Covid em março de 2023. Na CPI da Covid, o diretor da Pfizer contou que o governo Bolsonaro deixou sem resposta 3 ofertas de vacina em agosto de 2020. O primeiro contrato só foi assinado em março de 2021.',q:'“E daí? Lamento. Quer que eu faça o quê?” (Jair Bolsonaro, 28/04/2020, sobre as mortes por Covid)',tags:['Governo Bolsonaro','Saúde'],f:[['Ministério da Saúde, via Diario de Pernambuco (28/03/2023)','https://www.diariodepernambuco.com.br/noticia/brasil/2023/03/brasil-chega-a-700-mil-mortes-por-covid-19-e-ministerio-reforca-vacina.html'],['Pfizer na CPI, Correio Braziliense (14/05/2021)','https://www.correiobraziliense.com.br/politica/2021/05/4924437-cpi-da-covid-diretor-da-pfizer-diz-que-governo-ignorou-ofertas-de-vacina.html'],['Poder360 (28/04/2020)','https://www.poder360.com.br/governo/bolsonaro-sobre-mortes-por-covid-19-e-dai-lamento-quer-que-eu-faca-o-que/']]},
+ {t:'Corte na Farmácia Popular',n:'-59%',x:'No Orçamento de 2023, mandado ao Congresso em 2022, o governo Bolsonaro propôs cortar 59% da verba dos remédios de graça da Farmácia Popular: de R$ 2,04 bilhões pra R$ 842 milhões. O corte pegava remédios pra pressão, diabetes e asma, como losartana, metformina e insulina. Em Santos Dumont, <b>12.149 pessoas</b> usaram o programa em 2025.',tags:['Governo Bolsonaro','Saúde','Aposentados'],sd:1,f:[['Estadão, via Mercado & Consumo (14/09/2022)','https://mercadoeconsumo.com.br/14/09/2022/estadao-conteudo/corte-no-orcamento-da-farmacia-popular-atinge-13-medicamentos/'],['Ministério da Saúde (via Casa 13)']]},
+ {t:'O governo que ele defende',n:'',x:'No governo Bolsonaro, o salário mínimo teve reajustes praticamente sem aumento real de 2020 a 2022, e o Brasil voltou ao Mapa da Fome da ONU no relatório de 2022.',tags:['Governo Bolsonaro','Dinheiro no bolso','Família'],f:[['DIEESE (2023)',DIE],['FAO/ONU, relatório SOFI de 2022']]}
 ]};
-const BOATOS=[
- ['f','“Flávio vai acabar com o Bolsa Família.”','O plano dele diz que mantém os programas sociais.'],
- ['f','“Vai acabar com o 13º, as férias e a CLT.”','O plano não propõe isso. O que existe é a PEC do trabalho por hora, com direitos proporcionais às horas.'],
- ['f','“Vai acabar com a aposentadoria.”','Não está no plano. O que existe é a fala do coordenador sobre “revisitar” a Previdência.'],
- ['f','“Votou contra o fim da 6x1.”','Votou a favor, nos dois turnos.'],
- ['n','“Vai vender a Petrobras.”','O plano não cita a Petrobras. Fala em privatizações sem dizer quais.']];
 const norm=s=>String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
 const strip=h=>{const d=document.createElement('div');d.innerHTML=h;return d.textContent};
 function copyText(btn,txt){const done=()=>{btn.textContent='Copiado';setTimeout(()=>btn.textContent='Copiar',1600)};try{navigator.clipboard.writeText(txt).then(done,()=>{btn.textContent='Não deu pra copiar'})}catch(e){btn.textContent='Não deu pra copiar'}}
@@ -740,7 +729,6 @@ function argsSetup(k){
   draw();
 }
 argsSetup('lula');argsSetup('flavio');
-(function(){const B=document.getElementById('boatos');BOATOS.forEach(([k,a,b])=>B.appendChild(el('div','boato',`<b class="${k}">${k==='f'?'FALSO':'NÃO CONSTA'}</b><div><b>${esc(a)}</b><br>${esc(b)}</div>`)))})();
 
 // galeria
 function gal(id,items,ext){const g=document.getElementById(id);items.forEach(([f,alt])=>{const a=el('a');a.href=''+f+'.'+(ext||'jpg');a.target='_blank';a.rel='noopener';a.innerHTML=`<img src="t-${f}.${ext||'jpg'}" alt="${esc(alt)}" loading="lazy">`;g.appendChild(a)})}
