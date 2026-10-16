@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Resultado oficial do 1º turno em Santos Dumont por bairro, local de votação, seção e idade. E como ajudar a virar voto até o dia 25.">
+<meta name="theme-color" content="#D7090F">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://glaudeilsonmendes.github.io/raiox-santosdumont/">
+<meta property="og:title" content="Raio-X do 1º turno em Santos Dumont">
+<meta property="og:description" content="Quem votou, quem faltou e onde Lula perdeu votos, seção por seção. Dados oficiais do TSE.">
+<meta property="og:image" content="https://glaudeilsonmendes.github.io/raiox-santosdumont/capa.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<style>html{color-scheme:light}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Raio-X Eleitoral Santos Dumont</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: uma coluna no celular (até 2 colunas no desktop), faixa vermelha/amarela da página, abas fixas: Resultado · Onde focar · Virar voto */
+:root{
+  --bg:#FBF8F3; --panel:#FFFFFF; --ink:#1B1714; --ink2:#554D46; --muted:#857C73; --line:#E6DFD5; --track:#EFE8DE; --chip:#F3EDE4;
+  --red:#D7090F; --red-ink:#FFFFFF; --yellow:#FFD400; --yellow-ink:#1B1714; --brand-red:#FA0404; --brand-green:#02B824;
+  --lula:#C8102E; --flav:#1F5FA8; --other:#8C8577;
+  --good:#1E7A46; --bad:#B42318;
+  --font-display:'Anton', Impact, 'Arial Narrow Bold', sans-serif;
+  --font-body:'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#141110; --panel:#1E1A17; --ink:#F3EEE8; --ink2:#C9C0B6; --muted:#978E85; --line:#342E29; --track:#2B2521; --chip:#28221E;
+  --red:#E5544B; --red-ink:#1A0B0A; --yellow:#FFD400; --yellow-ink:#1B1714;
+  --lula:#D9443E; --flav:#4A86D6; --other:#7A746B; --good:#4CC27E; --bad:#F2685E; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#141110; --panel:#1E1A17; --ink:#F3EEE8; --ink2:#C9C0B6; --muted:#978E85; --line:#342E29; --track:#2B2521; --chip:#28221E;
+  --red:#E5544B; --red-ink:#1A0B0A; --yellow:#FFD400; --yellow-ink:#1B1714;
+  --lula:#D9443E; --flav:#4A86D6; --other:#7A746B; --good:#4CC27E; --bad:#F2685E; color-scheme:dark }
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.5;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.num,td.n,th.n{font-variant-numeric:tabular-nums}
+a{color:inherit}
+button,select,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+
+/* topo: foto da Torre de Santos Dumont + logo */
+.stripe{height:8px;background:linear-gradient(90deg,var(--brand-red) 0 60%,var(--yellow) 60% 80%,var(--brand-green) 80% 100%)}
+header.hero{position:relative;overflow:hidden;background:#120E1C;color:#FFFFFF}
+header.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;max-width:none}
+header.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,10,22,.35) 0%,rgba(14,10,22,.55) 45%,rgba(14,10,22,.92) 100%)}
+header.hero .wrap{position:relative;z-index:1;padding-block:20px 22px}
+.hero .logo{display:block;width:clamp(150px,34vw,230px);height:auto;filter:drop-shadow(0 6px 18px rgba(0,0,0,.45))}
+.eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.hero .eyebrow{color:rgba(255,255,255,.82);margin-top:clamp(40px,10vw,90px)}
+h1{font-family:var(--font-display);font-weight:400;font-size:clamp(40px,8.4vw,68px);line-height:1;margin:.2em 0 .15em;letter-spacing:.01em;text-transform:uppercase;text-wrap:balance;text-shadow:0 4px 24px rgba(0,0,0,.5)}
+h1 em{font-style:normal;color:var(--yellow)}
+.lede{color:rgba(255,255,255,.9);font-size:15.5px;margin:0;max-width:60ch}
+.countdown{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:var(--yellow);color:var(--yellow-ink);font-weight:700;border-radius:999px;padding:7px 15px;font-size:14px}
+.credit{position:absolute;right:max(10px,env(safe-area-inset-right,0px));bottom:6px;z-index:1;font-size:10.5px;color:rgba(255,255,255,.6)}
+/* faixas de foto nas abas */
+.photo{position:relative;border-radius:var(--r);overflow:hidden;background:#222}
+.photo img{display:block;width:100%;height:clamp(150px,30vw,260px);object-fit:cover}
+.photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 14px 10px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.75));color:#FFFFFF;font-size:13px;font-weight:600}
+.cta .photo{margin:-20px -20px 4px;border-radius:var(--r) var(--r) 0 0}
+.cta .photo img{object-position:50% 66%;height:clamp(190px,34vw,300px)}
+/* galeria */
+.gal{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+.gal a{flex:0 0 clamp(118px,30%,170px);scroll-snap-align:start;display:block;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--chip)}
+.gal img{display:block;width:100%;aspect-ratio:9/16;object-fit:cover}
+.gal.q img{aspect-ratio:auto;object-fit:contain;padding:6px}
+.galgroup+.galgroup{margin-top:16px}
+.galgroup h3{margin:0 0 8px}
+footer .brand{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+footer .brand img{height:46px;width:auto}
+
+/* abas */
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;flex-direction:column;gap:6px;padding-block:8px}
+.tabrow{display:flex;gap:6px}
+.tab{flex:1 1 0;border:0;background:transparent;border-radius:10px;padding:9px 8px;font-weight:700;font-size:14px;color:var(--ink2);cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.tab:hover:not([aria-selected="true"]){background:var(--chip)}
+.tab.main{padding:11px 10px;font-size:15px;border:2px solid var(--line);background:var(--panel);color:var(--ink);display:flex;align-items:center;justify-content:center;gap:8px}
+.tab.main .dot{width:10px;height:10px;border-radius:50%;flex:0 0 auto}
+.tab.main.lula .dot{background:var(--red)}.tab.main.flavio .dot{background:var(--flav)}
+.tab.main.lula[aria-selected="true"]{background:var(--red);border-color:var(--red);color:#FFFFFF}
+.tab.main.flavio[aria-selected="true"]{background:var(--flav);border-color:var(--flav);color:#FFFFFF}
+.tab.main[aria-selected="true"] .dot{background:#FFFFFF}
+/* argumentos */
+.argtools{display:flex;flex-direction:column;gap:10px}
+.search{position:relative}
+.search input{width:100%;padding:12px 14px 12px 40px;border:2px solid var(--line);border-radius:12px;background:var(--bg);font-size:15.5px}
+.search input:focus{border-color:var(--ink);outline:none}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted)}
+.count{font-size:13px;color:var(--muted);font-weight:600}
+.args{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:760px){.args{grid-template-columns:1fr 1fr}}
+.arg{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.arg .top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.arg h3{font-size:17px;line-height:1.3;margin:0}
+.arg .num{font-family:var(--font-display);font-size:34px;line-height:1;color:var(--red);white-space:nowrap}
+#flavio .arg .num{color:var(--flav)}
+.arg p{margin:0;font-size:14.5px}
+.arg blockquote{margin:0;padding:6px 0 6px 12px;border-left:3px solid var(--yellow);font-style:italic;color:var(--ink2);font-size:14px}
+.arg .tags{display:flex;flex-wrap:wrap;gap:5px}
+.arg .tag{font-size:11.5px;font-weight:700;background:var(--chip);color:var(--ink2);border-radius:999px;padding:2px 9px}
+.arg .tag.sd{background:var(--yellow);color:var(--yellow-ink)}
+.arg .fonte{font-size:12.5px;color:var(--muted)}
+.arg .fonte a{color:var(--muted)}
+.arg .btnrow .btn{padding:8px 14px;font-size:13.5px}
+.intro{display:flex;flex-direction:column;gap:6px}
+.intro h2{font-size:30px}
+.warn{background:var(--chip);border-left:4px solid var(--yellow);border-radius:10px;padding:10px 12px;font-size:14px}
+.empty{padding:18px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r)}
+.boatos{display:grid;gap:8px;margin-top:10px}
+.boato{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;font-size:14px}
+.boato b.f{background:var(--bad);color:#FFFFFF;border-radius:6px;padding:2px 7px;font-size:11.5px;letter-spacing:.04em}
+.boato b.n{background:var(--other);color:#FFFFFF;border-radius:6px;padding:2px 7px;font-size:11.5px;letter-spacing:.04em}
+main{padding-block:18px 40px}
+section.view{display:flex;flex-direction:column;gap:18px}
+
+/* blocos */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+h2{font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:26px;line-height:1.1;margin:0 0 4px;letter-spacing:.01em}
+h3{font-size:16px;font-weight:700;margin:0 0 8px}
+.hint{color:var(--muted);font-size:13px;margin:4px 0 0}
+.grid2{display:grid;grid-template-columns:1fr;gap:18px}
+@media (min-width:860px){.grid2{grid-template-columns:1fr 1fr}}
+.grid2>*{min-width:0}
+
+/* filtros */
+.filters{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:700px){.filters{grid-template-columns:repeat(3,1fr)}}
+.field label{display:block;font-size:12.5px;font-weight:700;color:var(--ink2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+.field select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:7px 13px;font-size:13.5px;font-weight:600;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.agerow{margin-top:14px}
+.scope{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+.scope strong{font-size:15px}
+.linkbtn{border:0;background:none;padding:0;color:var(--red);font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+/* números */
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (min-width:700px){.kpis{grid-template-columns:repeat(5,1fr)}}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.kpi .k{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.kpi .v{font-family:var(--font-display);font-size:30px;line-height:1.15;font-variant-numeric:tabular-nums}
+.kpi .s{font-size:13px;color:var(--ink2)}
+.kpi.hot{background:var(--red);border-color:var(--red);color:var(--red-ink)}
+.kpi.hot .k,.kpi.hot .s{color:var(--red-ink);opacity:.9}
+
+/* barras */
+.bars{display:flex;flex-direction:column;gap:9px}
+.bar{display:grid;grid-template-columns:minmax(96px,32%) 1fr auto;align-items:center;gap:10px}
+.bar .lab{font-weight:600;font-size:14px;line-height:1.25;min-width:0}
+.bar .lab small{display:block;font-weight:500;color:var(--muted);font-size:12px}
+.bar .tr{height:14px;background:var(--track);border-radius:4px;overflow:hidden}
+.bar .fill{height:100%;border-radius:0 4px 4px 0;background:var(--other)}
+.bar .val{font-weight:700;font-size:14px;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.bar .val small{font-weight:500;color:var(--muted);margin-left:6px}
+.bar.sel .lab{color:var(--red)}
+.diff{margin-top:12px;padding:10px 12px;background:var(--chip);border-radius:10px;font-size:14px}
+
+/* 100% empilhada */
+.stack{display:flex;gap:2px;height:22px;border-radius:5px;overflow:hidden;background:var(--panel)}
+.stack span{display:block;height:100%}
+.cmprow{display:grid;grid-template-columns:76px 1fr;gap:10px;align-items:center;margin-bottom:12px}
+.cmprow .t{font-size:13px;font-weight:700;line-height:1.2}
+.cmprow .t small{display:block;font-weight:500;color:var(--muted)}
+.cmprow .lg{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;margin-top:3px;font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--ink2);margin:2px 0 12px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.note{font-size:13px;color:var(--ink2);background:var(--chip);border-radius:10px;padding:10px 12px;margin-top:8px}
+.up{color:var(--good);font-weight:700}.down{color:var(--bad);font-weight:700}
+
+/* tabela */
+.tablewrap{overflow-x:auto;margin:0 -18px;padding:0 18px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:13.5px}
+th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;white-space:nowrap}
+th button{border:0;background:none;padding:0;font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer}
+th[aria-sort] button{color:var(--ink)}
+th.n,td.n{text-align:right}
+td.loc{min-width:190px}
+td.loc b{font-weight:600}
+td.loc small{display:block;color:var(--muted);font-size:12px}
+tr.click{cursor:pointer}
+tr.click:hover td{background:var(--chip)}
+
+/* onde focar */
+.rank .bar{grid-template-columns:1fr auto;grid-template-areas:"lab lab" "tr val";row-gap:5px}
+.rank .bar .lab{grid-area:lab}.rank .bar .tr{grid-area:tr}.rank .bar .val{grid-area:val}
+@media (min-width:760px){.rank .bar{grid-template-columns:minmax(200px,38%) 1fr auto;grid-template-areas:"lab tr val"}}
+.rank .bar .fill{background:var(--red)}
+.rank .row{border:0;background:none;padding:6px 4px;margin:0 -4px;border-radius:8px;text-align:left;cursor:pointer;width:calc(100% + 8px)}
+.rank .row:hover{background:var(--chip)}
+.big{font-family:var(--font-display);font-size:34px;line-height:1.1;font-variant-numeric:tabular-nums}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:12px}
+.fact{border-left:4px solid var(--yellow);padding:4px 0 4px 12px}
+.fact .big{font-size:30px}
+.fact p{margin:0;font-size:13.5px;color:var(--ink2)}
+
+/* virar voto */
+.cta{background:var(--red);color:var(--red-ink);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px}
+.cta h2{font-size:34px}
+.cta p{margin:0;max-width:56ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:11px 18px;font-weight:700;font-size:14.5px;text-decoration:none;cursor:pointer;border:2px solid transparent}
+.btn.light{background:var(--yellow);color:var(--yellow-ink)}
+.btn.ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn.dark{background:var(--ink);color:var(--bg)}
+.btnrow{display:flex;flex-wrap:wrap;gap:8px}
+ol.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:s}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start}
+ol.steps li::before{content:counter(s);font-family:var(--font-display);font-size:30px;line-height:1;color:var(--red);text-align:center;padding-top:2px}
+ol.steps b{display:block;font-size:15.5px}
+ol.steps p{margin:2px 0 0;color:var(--ink2);font-size:14px}
+details.obj{border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+details.obj+details.obj{margin-top:8px}
+details.obj summary{cursor:pointer;padding:13px 14px;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:10px}
+details.obj summary::-webkit-details-marker{display:none}
+details.obj summary::after{content:"+";font-weight:800;color:var(--red)}
+details.obj[open] summary::after{content:"–"}
+details.obj .ans{padding:0 14px 14px;font-size:14.5px}
+details.obj .ans p{margin:0 0 8px}
+.src{font-size:12px;color:var(--muted)}
+.msg{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--bg);display:flex;flex-direction:column;gap:10px}
+.msg .when{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.msg textarea{width:100%;border:0;background:transparent;resize:none;font-family:var(--font-body);font-size:14.5px;line-height:1.5;padding:0;min-height:4.5em;overflow:hidden}
+.msgs{display:grid;grid-template-columns:1fr;gap:10px}
+@media (min-width:760px){.msgs{grid-template-columns:1fr 1fr}}
+.rules{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:700px){.rules{grid-template-columns:1fr 1fr}}
+.rules ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rules li{display:grid;grid-template-columns:24px 1fr;gap:8px;font-size:14.5px}
+.rules .ok::before{content:"✓";color:var(--good);font-weight:800}
+.rules .no::before{content:"✕";color:var(--bad);font-weight:800}
+footer{border-top:1px solid var(--line);padding-block:20px 36px;color:var(--ink2);font-size:13px}
+footer ul{padding-left:18px;margin:6px 0}
+@media (prefers-reduced-motion:no-preference){.bar .fill,.stack span{transition:width .35s ease}}
+</style>
+
+</head>
+<body>
+<div class="stripe"></div>
+<header class="hero">
+  <img class="bg" src="torre.jpg" alt="" fetchpriority="high">
+  <div class="wrap">
+    <img class="logo" src="logo.png" alt="Santos Dumont 13 com Lula" width="560" height="366">
+    <div class="eyebrow">@santosdumontcomlula · dados oficiais do TSE</div>
+    <h1>Raio-X do <em>1º turno</em> em Santos Dumont</h1>
+    <p class="lede">Argumentos com fonte, o resultado do 1º turno seção por seção e o kit pra virar voto até o dia 25.</p>
+    <div class="countdown" id="countdown">2º turno: 25 de outubro</div>
+  </div>
+  <span class="credit">Réplica da Torre Eiffel · Santos Dumont</span>
+</header>
+
+<nav class="tabs" aria-label="Seções da página"><div class="wrap" role="tablist">
+  <div class="tabrow">
+    <button class="tab main lula" role="tab" id="t-lula" aria-controls="lula" aria-selected="true"><span class="dot"></span>Por que Lula</button>
+    <button class="tab main flavio" role="tab" id="t-flavio" aria-controls="flavio" aria-selected="false"><span class="dot"></span>Flávio: o que pesa</button>
+  </div>
+  <div class="tabrow">
+    <button class="tab" role="tab" id="t-resultado" aria-controls="resultado" aria-selected="false">Resultado</button>
+    <button class="tab" role="tab" id="t-focar" aria-controls="focar" aria-selected="false">Onde focar</button>
+    <button class="tab" role="tab" id="t-virar" aria-controls="virar" aria-selected="false">Virar voto</button>
+  </div>
+</div></nav>
+
+<main class="wrap">
+
+<!-- ============ POR QUE LULA ============ -->
+<section class="view" id="lula" role="tabpanel" aria-labelledby="t-lula">
+  <div class="card intro">
+    <h2>Por que Lula</h2>
+    <p style="margin:0">O que melhorou na vida das pessoas, com fonte. Busque pelo assunto que importa pra quem você quer convencer.</p>
+    <div class="argtools" style="margin-top:6px">
+      <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input id="q-lula" type="search" placeholder="Buscar: salário, remédio, aposentado, escola…" aria-label="Buscar argumentos a favor do Lula" autocomplete="off"></div>
+      <div class="chips" id="tags-lula" role="group" aria-label="Filtrar por tema"></div>
+      <div class="count" id="count-lula"></div>
+    </div>
+  </div>
+  <div class="args" id="args-lula"></div>
+</section>
+
+<!-- ============ FLÁVIO ============ -->
+<section class="view" id="flavio" role="tabpanel" aria-labelledby="t-flavio" hidden>
+  <div class="card intro">
+    <h2>Flávio: o que pesa</h2>
+    <p style="margin:0">O que ele defende, o que a campanha dele propõe e o que ele não explica. Tudo com fonte.</p>
+    <div class="warn">Só fato com fonte. Sem xingar e sem montagem: boato é crime eleitoral e derruba a confiança em quem compartilha.</div>
+    <div class="argtools" style="margin-top:6px">
+      <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input id="q-flavio" type="search" placeholder="Buscar: trabalho, aposentadoria, SUS, indulto…" aria-label="Buscar fatos sobre Flávio Bolsonaro" autocomplete="off"></div>
+      <div class="chips" id="tags-flavio" role="group" aria-label="Filtrar por tema"></div>
+      <div class="count" id="count-flavio"></div>
+    </div>
+  </div>
+  <div class="args" id="args-flavio"></div>
+  <div class="card">
+    <h2>Boatos: não compartilhe</h2>
+    <p class="hint">Isso circula por aí, mas não é verdade ou não está no plano dele. Repetir só ajuda o outro lado a desmentir a gente.</p>
+    <div class="boatos" id="boatos"></div>
+    <p class="src" style="margin-top:10px">Fontes: plano de governo registrado no TSE, conferido pela Jovem Pan (07/10/2026); votação da PEC 221/2019 no Senado (14/10/2026).</p>
+  </div>
+</section>
+
+<!-- ============ RESULTADO ============ -->
+<section class="view" id="resultado" role="tabpanel" aria-labelledby="t-resultado" hidden>
+  <div class="card" id="filtros">
+    <div class="filters">
+      <div class="field"><label for="f-bairro">Bairro</label><select id="f-bairro"></select></div>
+      <div class="field"><label for="f-local">Local de votação</label><select id="f-local"></select></div>
+      <div class="field"><label for="f-secao">Seção</label><select id="f-secao"></select></div>
+    </div>
+    <div class="agerow">
+      <div class="field"><label id="lab-idade">Idade</label></div>
+      <div class="chips" id="f-idade" role="group" aria-labelledby="lab-idade"></div>
+    </div>
+    <div class="scope"><span>Mostrando:</span><strong id="scope">Cidade inteira</strong><button class="linkbtn" id="limpar" hidden>Limpar filtros</button></div>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>Votos para presidente</h2>
+      <p class="hint" id="cand-hint">% dos votos válidos, como o TSE calcula.</p>
+      <div class="bars" id="cand" style="margin-top:12px"></div>
+      <div class="diff" id="diff"></div>
+    </div>
+    <div class="card">
+      <h2>Comparado com 2022</h2>
+      <p class="hint">Lula contra o candidato do Bolsonaro, em % dos votos válidos.</p>
+      <div class="legend"><span><i style="background:var(--lula)"></i>Lula</span><span><i style="background:var(--other)"></i>Outros</span><span><i style="background:var(--flav)"></i>Bolsonaro (2022) / Flávio (2026)</span></div>
+      <div id="cmp"></div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>Idade do eleitorado</h2>
+      <p class="hint" id="age-hint">Quantos eleitores de cada idade votam aqui.</p>
+      <div class="bars" id="ages" style="margin-top:12px"></div>
+      <div class="note" id="age-note"></div>
+    </div>
+    <div class="card">
+      <h2>Mulheres e homens</h2>
+      <p class="hint">Eleitores aptos, pelo cadastro do TSE.</p>
+      <div id="sexo" style="margin-top:12px"></div>
+      <div class="note" id="sexo-note"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 id="tbl-title">Locais de votação</h2>
+    <p class="hint" id="tbl-hint">Toque num local pra ver as seções dele. Toque no título da coluna pra ordenar.</p>
+    <div class="tablewrap" style="margin-top:10px"><table id="tbl"></table></div>
+  </div>
+</section>
+
+<!-- ============ ONDE FOCAR ============ -->
+<section class="view" id="focar" role="tabpanel" aria-labelledby="t-focar" hidden>
+  <figure class="photo" style="margin:0"><img src="escola.jpg" alt="Escola de Santos Dumont que funciona como local de votação" loading="lazy"><figcaption>Em Santos Dumont, a eleição acontece em 53 locais: escolas, clubes e salões dos bairros.</figcaption></figure>
+  <div class="card">
+    <h2>O tamanho do jogo</h2>
+    <div class="facts" id="facts"></div>
+    <div class="note" style="margin-top:14px">Em 2022, entre o 1º e o 2º turno, <b>Bolsonaro cresceu 1.803 votos</b> aqui e <b>Lula, 1.140</b>. A vantagem do 1º turno não está garantida.</div>
+  </div>
+  <div class="card">
+    <h2>Onde focar</h2>
+    <p class="hint">Escolha o que procurar. Toque num local pra abrir o resultado dele.</p>
+    <div class="chips" id="rank-metric" role="group" aria-label="Critério" style="margin-top:12px"></div>
+    <p class="hint" id="rank-hint" style="margin-top:10px"></p>
+    <div class="bars rank" id="rank" style="margin-top:10px"></div>
+  </div>
+</section>
+
+<!-- ============ VIRAR VOTO ============ -->
+<section class="view" id="virar" role="tabpanel" aria-labelledby="t-virar" hidden>
+  <div class="cta">
+    <figure class="photo" style="margin-bottom:4px"><img src="ato.jpg" alt="Apoiadores do Lula com bandeiras nas ruas de Santos Dumont" loading="lazy"><figcaption>Militância nas ruas de Santos Dumont</figcaption></figure>
+    <h2>Travou na conversa? Me chama que eu te ajudo!</h2>
+    <p>Manda no direct a dúvida ou a desculpa que você ouviu. A gente responde com dado oficial.</p>
+    <div class="btnrow"><a class="btn light" href="https://ig.me/m/santosdumontcomlula" target="_blank" rel="noopener">Chamar no direct</a><span style="align-self:center;font-weight:600">@santosdumontcomlula</span></div>
+  </div>
+
+  <div class="card">
+    <h2>5 passos pra virar um voto</h2>
+    <ol class="steps" style="margin-top:12px">
+      <li><div><b>Escolha 1 pessoa</b><p>Quem não foi votar no 1º turno, quem anulou ou quem tá em dúvida. Bolsonarista convicto? Não gaste energia.</p></div></li>
+      <li><div><b>Pergunte antes de falar</b><p>“O que mais te preocupa hoje?” E escute de verdade. Quem se sente ouvido escuta de volta.</p></div></li>
+      <li><div><b>Fale de direitos, com dado</b><p>Trabalho, salário, remédio, escola dos filhos. Use as respostas prontas abaixo.</p></div></li>
+      <li><div><b>Sem briga, sem humilhar</b><p>Ninguém muda de voto se sentindo burro. Esquentou? Mude de assunto e volte outro dia.</p></div></li>
+      <li><div><b>Feche com um pedido</b><p>“Vai votar dia 25? Vote Lula.” E no sábado, dia 24, mande uma mensagem lembrando.</p></div></li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Respostas prontas</h2>
+    <p class="hint">O que você vai ouvir e o que responder. Tudo com fonte.</p>
+    <div style="margin-top:12px" id="objs">
+      <details class="obj"><summary>“Não votei no 1º turno. Posso votar no 2º?”</summary><div class="ans">
+        <p><b>Pode.</b> Cada turno é uma eleição separada. A falta do 1º turno se justifica depois, até 3 de dezembro, pelo app e-Título ou no site do TSE. Quem não justificar paga multa de R$ 3,51.</p>
+        <p>Aqui, 8.774 pessoas não votaram no 1º turno. Todas podem votar dia 25.</p>
+        <p class="src">Fonte: TSE</p></div></details>
+      <details class="obj"><summary>“Vou votar branco ou nulo.”</summary><div class="ans">
+        <p>Branco e nulo não vão pra ninguém. O 2º turno é decidido só pelos votos válidos, então quem anula deixa os outros escolherem por ele.</p>
+        <p>No 1º turno, 1.618 pessoas daqui votaram branco ou nulo.</p>
+        <p class="src">Fonte: Constituição Federal, art. 77; TSE</p></div></details>
+      <details class="obj"><summary>“Política não muda nada na minha vida.”</summary><div class="ans">
+        <p>Em Santos Dumont mudou, e dá pra mostrar:</p>
+        <p>• <b>12.149 pessoas</b> pegaram remédio na Farmácia Popular em 2025.<br>• <b>2.765 famílias</b> no Bolsa Família em 2026, com <b>1.288 crianças</b> de até 6 anos recebendo R$ 150 a mais.<br>• <b>R$ 330,8 milhões</b> do INSS pagos aqui em 2025.<br>• <b>815 alunos</b> no Pé-de-Meia em 2026.</p>
+        <p class="src">Fontes: Ministério da Saúde, MDS, Previdência e MEC (via Casa 13)</p></div></details>
+      <details class="obj"><summary>“Ganho pouco e pago imposto demais.”</summary><div class="ans">
+        <p>Desde janeiro de 2026, quem ganha até <b>R$ 5 mil</b> por mês não paga Imposto de Renda. Quem ganha até R$ 7.350 paga menos. São mais de 15 milhões de pessoas no país.</p>
+        <p class="src">Fonte: Lei 15.270/2025</p></div></details>
+      <details class="obj"><summary>“Remédio tá caro.”</summary><div class="ans">
+        <p>Desde fevereiro de 2025, os <b>41 remédios</b> da Farmácia Popular são de graça, como os de pressão, diabetes e asma. É só levar a receita e o documento numa farmácia credenciada. O programa foi criado pelo Lula em 2004.</p>
+        <p class="src">Fonte: Ministério da Saúde</p></div></details>
+      <details class="obj"><summary>“O Flávio também votou pelo fim da 6x1.”</summary><div class="ans">
+        <p>Votou, e isso é bom. A PEC aprovada no Senado em 14/10 reduz a jornada de 44 pra 40 horas, com 2 folgas por semana e sem cortar salário.</p>
+        <p>Mas o Flávio assina a PEC 12/2026, do coordenador da campanha dele, que cria o <b>trabalho pago por hora</b>: férias, 13º e FGTS proporcionais às horas, sem garantia de 2 folgas.</p>
+        <p class="src">Fontes: Senado Notícias (14/10/2026); Exame (15/10/2026); Congresso em Foco (06/10/2026)</p></div></details>
+      <details class="obj"><summary>“Tá tudo caro no mercado.”</summary><div class="ans">
+        <p>O salário mínimo voltou a subir acima da inflação todo ano, por lei. E a reforma tributária aprovada no governo Lula zera os impostos sobre os alimentos da cesta básica nacional, com transição até 2033.</p>
+        <p class="src">Fontes: Lei 14.663/2023; Lei Complementar 214/2025</p></div></details>
+      <details class="obj"><summary>“O Lula foi condenado.”</summary><div class="ans">
+        <p>As condenações foram anuladas pelo STF em 2021. O tribunal decidiu que o caso foi julgado no lugar errado e que o juiz Sergio Moro agiu com parcialidade. Hoje o Lula não tem condenação, e por isso a Justiça Eleitoral aprovou a candidatura.</p>
+        <p>Se a conversa travar aqui, não insista. Volte pro passo 2: pergunte o que preocupa a pessoa hoje.</p>
+        <p class="src">Fonte: STF, HC 193.726 e HC 164.493 (2021)</p></div></details>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Mensagens prontas</h2>
+    <p class="hint">Copie ou abra direto no WhatsApp. Troque o que estiver entre colchetes.</p>
+    <div class="msgs" id="msgs" style="margin-top:12px"></div>
+  </div>
+
+  <div class="card">
+    <h2>Material pra compartilhar</h2>
+    <p class="hint">As artes que já saíram na página. Arraste pro lado pra ver todas. Toque pra abrir em tamanho grande e segure o dedo na imagem pra salvar.</p>
+    <div class="galgroup" style="margin-top:12px"><h3>Kit Vira Voto</h3><div class="gal" id="gal-kit"></div></div>
+    <div class="galgroup"><h3>10 conquistas do governo Lula</h3><div class="gal" id="gal-conq"></div></div>
+    <div class="galgroup"><h3>Quadros do 1º turno e Já pediu um voto?</h3><div class="gal q" id="gal-q"></div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>Dia 25</h2>
+      <ul style="margin:8px 0 0;padding-left:18px;display:grid;gap:6px">
+        <li>Votação das <b>8h às 17h</b> (horário de Brasília).</li>
+        <li>Leve um <b>documento oficial com foto</b> ou o <b>e-Título</b>.</li>
+        <li>Quem faltou no 1º turno <b>pode votar</b> normalmente.</li>
+        <li>Não sabe o local? Escolha a seção na aba Resultado e veja o endereço.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Pode × Não pode</h2>
+      <div class="rules" style="margin-top:8px">
+        <ul><li class="ok">Conversar e convidar pra votar</li><li class="ok">Mandar conteúdo com fonte</li><li class="ok">Levar a própria família pra votar</li></ul>
+        <ul><li class="no">Oferecer qualquer coisa em troca de voto</li><li class="no">Dar carona pra quem não é da família no dia</li><li class="no">Espalhar notícia falsa</li><li class="no">Pedir voto na fila ou postar propaganda no dia 25</li></ul>
+      </div>
+      <p class="src" style="margin-top:10px">Código Eleitoral, arts. 299 e 323; Lei 6.091/74, arts. 5º e 11; Lei 9.504/97, art. 39, §5º.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <div class="brand"><img src="logo-h.png" alt="Santos Dumont 13 com Lula" width="800" height="269" loading="lazy"><a href="https://www.instagram.com/santosdumontcomlula/" target="_blank" rel="noopener" style="font-weight:700">@santosdumontcomlula no Instagram</a></div>
+  <b>De onde vêm os números</b>
+  <ul>
+    <li>Votos, comparecimento, brancos e nulos por seção: TSE, votação por seção e detalhe da apuração por seção (1º turno de 4/10/2026). Os totais batem com o resultado oficial da cidade.</li>
+    <li>Bairro e endereço: cadastro de locais de votação do TSE. <b>O bairro é onde fica o local de votação, não onde o eleitor mora.</b> Quase 6 em cada 10 eleitores votam em locais cadastrados como Centro.</li>
+    <li>Idade e sexo por seção: perfil do eleitorado por seção (TSE, julho de 2026). O voto é secreto: não existe dado de em quem cada idade ou sexo votou.</li>
+    <li>Quem faltou por idade e sexo: perfil de comparecimento e abstenção do TSE. Só existe para a cidade inteira.</li>
+    <li>Comparação com 2022: votação por seção de 2022 (TSE), somada por local de votação ou bairro. Só aparece quando o número de eleitores do lugar mudou menos de 15%, porque seções mudam de lugar entre eleições.</li>
+  </ul>
+  <p style="margin:6px 0 0"><a href="https://dadosabertos.tse.jus.br" target="_blank" rel="noopener">Portal de dados abertos do TSE</a> · <a href="https://resultados.tse.jus.br" target="_blank" rel="noopener">Resultados do TSE</a></p>
+</div></footer>
+
+<script type="application/json" id="data">{"secs":[{"s":14,"l":1570,"ap":287,"co":221,"lula":116,"flav":72,"cury":5,"renan":6,"caiado":8,"zema":1,"out":0,"br":3,"nu":10,"age":[0,20,28,56,63,65,55],"fem":151,"mas":136,"ag":[]},{"s":15,"l":1570,"ap":287,"co":231,"lula":120,"flav":91,"cury":3,"renan":2,"caiado":2,"zema":0,"out":2,"br":8,"nu":3,"age":[2,10,47,31,84,61,55],"fem":154,"mas":136,"ag":[]},{"s":16,"l":1023,"ap":242,"co":167,"lula":79,"flav":53,"cury":13,"renan":4,"caiado":3,"zema":1,"out":2,"br":5,"nu":7,"age":[1,1,36,40,46,48,71],"fem":127,"mas":116,"ag":[]},{"s":17,"l":1210,"ap":270,"co":195,"lula":90,"flav":77,"cury":7,"renan":7,"caiado":3,"zema":0,"out":0,"br":7,"nu":4,"age":[1,14,65,40,60,39,49],"fem":151,"mas":117,"ag":[]},{"s":18,"l":1210,"ap":266,"co":207,"lula":105,"flav":77,"cury":8,"renan":2,"caiado":6,"zema":1,"out":0,"br":5,"nu":3,"age":[1,16,56,33,80,41,39],"fem":147,"mas":119,"ag":[]},{"s":19,"l":1031,"ap":213,"co":162,"lula":67,"flav":71,"cury":4,"renan":0,"caiado":5,"zema":4,"out":0,"br":5,"nu":6,"age":[2,2,11,15,53,60,68],"fem":120,"mas":91,"ag":[]},{"s":20,"l":1570,"ap":282,"co":214,"lula":99,"flav":90,"cury":4,"renan":3,"caiado":2,"zema":1,"out":1,"br":3,"nu":11,"age":[1,9,43,43,68,50,71],"fem":151,"mas":134,"ag":[]},{"s":21,"l":1554,"ap":249,"co":205,"lula":113,"flav":58,"cury":5,"renan":4,"caiado":5,"zema":0,"out":1,"br":5,"nu":14,"age":[1,19,32,17,149,18,13],"fem":111,"mas":138,"ag":[]},{"s":22,"l":1040,"ap":231,"co":167,"lula":73,"flav":69,"cury":3,"renan":2,"caiado":5,"zema":0,"out":0,"br":6,"nu":9,"age":[0,5,21,43,34,58,72],"fem":134,"mas":99,"ag":[]},{"s":23,"l":1554,"ap":252,"co":180,"lula":93,"flav":64,"cury":6,"renan":2,"caiado":5,"zema":1,"out":2,"br":4,"nu":3,"age":[1,20,39,46,32,52,61],"fem":140,"mas":111,"ag":[]},{"s":24,"l":1104,"ap":206,"co":160,"lula":76,"flav":67,"cury":2,"renan":2,"caiado":4,"zema":0,"out":1,"br":4,"nu":4,"age":[1,12,1,48,60,46,40],"fem":111,"mas":97,"ag":[]},{"s":25,"l":1600,"ap":354,"co":249,"lula":117,"flav":101,"cury":8,"renan":4,"caiado":4,"zema":7,"out":0,"br":4,"nu":4,"age":[0,3,7,71,39,109,125],"fem":184,"mas":170,"ag":[37]},{"s":26,"l":1554,"ap":246,"co":191,"lula":91,"flav":70,"cury":13,"renan":3,"caiado":5,"zema":1,"out":0,"br":5,"nu":3,"age":[1,19,45,49,49,36,48],"fem":141,"mas":106,"ag":[]},{"s":27,"l":1465,"ap":300,"co":234,"lula":112,"flav":88,"cury":13,"renan":2,"caiado":2,"zema":0,"out":0,"br":7,"nu":10,"age":[1,20,23,72,114,31,39],"fem":171,"mas":129,"ag":[]},{"s":28,"l":1040,"ap":237,"co":178,"lula":81,"flav":73,"cury":3,"renan":0,"caiado":4,"zema":3,"out":0,"br":7,"nu":7,"age":[0,4,23,54,44,52,59],"fem":133,"mas":103,"ag":[]},{"s":29,"l":1210,"ap":260,"co":201,"lula":96,"flav":81,"cury":5,"renan":3,"caiado":1,"zema":0,"out":1,"br":9,"nu":5,"age":[4,15,31,43,83,41,44],"fem":147,"mas":114,"ag":[]},{"s":30,"l":1074,"ap":291,"co":219,"lula":124,"flav":65,"cury":4,"renan":4,"caiado":4,"zema":4,"out":1,"br":5,"nu":8,"age":[2,23,19,41,75,74,58],"fem":146,"mas":146,"ag":[]},{"s":31,"l":1074,"ap":293,"co":217,"lula":117,"flav":63,"cury":9,"renan":4,"caiado":5,"zema":3,"out":1,"br":6,"nu":9,"age":[0,27,13,46,54,76,76],"fem":159,"mas":133,"ag":[]},{"s":32,"l":1449,"ap":311,"co":240,"lula":130,"flav":84,"cury":3,"renan":3,"caiado":3,"zema":3,"out":0,"br":5,"nu":9,"age":[2,26,24,47,83,68,60],"fem":175,"mas":135,"ag":[]},{"s":33,"l":1082,"ap":200,"co":143,"lula":70,"flav":52,"cury":1,"renan":4,"caiado":4,"zema":1,"out":2,"br":1,"nu":8,"age":[0,3,18,26,34,57,63],"fem":114,"mas":86,"ag":[]},{"s":34,"l":1082,"ap":201,"co":151,"lula":73,"flav":66,"cury":0,"renan":2,"caiado":0,"zema":3,"out":0,"br":3,"nu":4,"age":[3,3,16,41,43,49,45],"fem":125,"mas":74,"ag":[]},{"s":35,"l":1090,"ap":244,"co":174,"lula":85,"flav":66,"cury":9,"renan":0,"caiado":6,"zema":2,"out":1,"br":2,"nu":3,"age":[1,5,37,38,32,57,74],"fem":134,"mas":110,"ag":[]},{"s":36,"l":1090,"ap":242,"co":183,"lula":94,"flav":69,"cury":5,"renan":1,"caiado":3,"zema":2,"out":1,"br":1,"nu":7,"age":[1,5,29,37,48,69,53],"fem":132,"mas":110,"ag":[]},{"s":38,"l":1554,"ap":248,"co":192,"lula":95,"flav":65,"cury":5,"renan":5,"caiado":6,"zema":0,"out":3,"br":6,"nu":7,"age":[2,20,25,60,92,26,25],"fem":140,"mas":110,"ag":[]},{"s":39,"l":1104,"ap":205,"co":146,"lula":73,"flav":55,"cury":7,"renan":1,"caiado":5,"zema":1,"out":0,"br":1,"nu":3,"age":[0,2,10,21,35,69,68],"fem":115,"mas":89,"ag":[]},{"s":40,"l":1104,"ap":200,"co":147,"lula":73,"flav":58,"cury":1,"renan":3,"caiado":6,"zema":0,"out":0,"br":2,"nu":4,"age":[0,5,13,18,43,62,60],"fem":110,"mas":91,"ag":[]},{"s":41,"l":1554,"ap":246,"co":199,"lula":95,"flav":81,"cury":3,"renan":4,"caiado":4,"zema":1,"out":1,"br":5,"nu":5,"age":[1,13,28,43,136,13,15],"fem":125,"mas":124,"ag":[]},{"s":42,"l":1112,"ap":228,"co":167,"lula":75,"flav":74,"cury":4,"renan":2,"caiado":4,"zema":1,"out":0,"br":2,"nu":5,"age":[1,7,22,31,37,59,71],"fem":129,"mas":99,"ag":[]},{"s":43,"l":1112,"ap":225,"co":154,"lula":73,"flav":58,"cury":7,"renan":1,"caiado":4,"zema":0,"out":1,"br":2,"nu":8,"age":[0,6,21,40,32,64,64],"fem":136,"mas":91,"ag":[]},{"s":44,"l":1040,"ap":222,"co":167,"lula":79,"flav":72,"cury":6,"renan":2,"caiado":5,"zema":0,"out":0,"br":0,"nu":3,"age":[0,7,16,50,27,66,57],"fem":111,"mas":112,"ag":[]},{"s":45,"l":1660,"ap":225,"co":179,"lula":86,"flav":76,"cury":6,"renan":1,"caiado":3,"zema":0,"out":1,"br":2,"nu":4,"age":[0,5,16,51,56,51,49],"fem":121,"mas":107,"ag":[]},{"s":46,"l":1120,"ap":351,"co":246,"lula":132,"flav":81,"cury":6,"renan":3,"caiado":10,"zema":1,"out":1,"br":3,"nu":9,"age":[2,57,40,58,61,72,63],"fem":177,"mas":174,"ag":[]},{"s":47,"l":1120,"ap":350,"co":242,"lula":137,"flav":75,"cury":4,"renan":4,"caiado":8,"zema":3,"out":1,"br":5,"nu":5,"age":[1,50,44,52,68,65,72],"fem":172,"mas":180,"ag":[]},{"s":48,"l":1120,"ap":351,"co":274,"lula":164,"flav":69,"cury":5,"renan":6,"caiado":9,"zema":4,"out":2,"br":10,"nu":5,"age":[3,50,33,64,69,64,67],"fem":197,"mas":153,"ag":[]},{"s":49,"l":1120,"ap":348,"co":268,"lula":131,"flav":100,"cury":6,"renan":7,"caiado":2,"zema":6,"out":0,"br":9,"nu":7,"age":[3,57,49,68,61,61,50],"fem":184,"mas":165,"ag":[]},{"s":50,"l":1120,"ap":349,"co":274,"lula":156,"flav":82,"cury":10,"renan":9,"caiado":4,"zema":0,"out":0,"br":6,"nu":7,"age":[1,51,54,44,100,61,38],"fem":173,"mas":176,"ag":[]},{"s":51,"l":1139,"ap":376,"co":282,"lula":137,"flav":114,"cury":9,"renan":5,"caiado":7,"zema":0,"out":0,"br":5,"nu":5,"age":[1,55,76,67,57,60,60],"fem":209,"mas":167,"ag":[]},{"s":52,"l":1139,"ap":378,"co":267,"lula":120,"flav":107,"cury":10,"renan":14,"caiado":3,"zema":2,"out":1,"br":5,"nu":5,"age":[3,55,86,58,55,56,66],"fem":188,"mas":191,"ag":[]},{"s":53,"l":1139,"ap":378,"co":290,"lula":144,"flav":101,"cury":12,"renan":6,"caiado":7,"zema":3,"out":1,"br":4,"nu":12,"age":[3,38,61,57,99,62,58],"fem":203,"mas":175,"ag":[]},{"s":54,"l":1210,"ap":267,"co":202,"lula":95,"flav":88,"cury":6,"renan":0,"caiado":3,"zema":1,"out":0,"br":3,"nu":6,"age":[1,12,53,37,41,53,71],"fem":150,"mas":118,"ag":[]},{"s":55,"l":1210,"ap":269,"co":208,"lula":102,"flav":73,"cury":9,"renan":4,"caiado":7,"zema":2,"out":0,"br":5,"nu":6,"age":[1,12,48,42,71,58,38],"fem":150,"mas":120,"ag":[]},{"s":56,"l":1155,"ap":278,"co":213,"lula":112,"flav":74,"cury":1,"renan":7,"caiado":5,"zema":2,"out":0,"br":8,"nu":4,"age":[0,15,41,51,42,79,52],"fem":135,"mas":145,"ag":[]},{"s":57,"l":1155,"ap":275,"co":212,"lula":112,"flav":69,"cury":7,"renan":7,"caiado":3,"zema":1,"out":0,"br":3,"nu":10,"age":[0,13,58,58,32,62,54],"fem":149,"mas":128,"ag":[]},{"s":58,"l":1155,"ap":279,"co":213,"lula":110,"flav":75,"cury":5,"renan":5,"caiado":2,"zema":1,"out":0,"br":6,"nu":9,"age":[0,13,51,61,42,59,53],"fem":148,"mas":131,"ag":[]},{"s":59,"l":1155,"ap":280,"co":206,"lula":105,"flav":74,"cury":10,"renan":2,"caiado":2,"zema":2,"out":0,"br":5,"nu":6,"age":[2,20,46,53,84,41,33],"fem":141,"mas":138,"ag":[]},{"s":60,"l":1163,"ap":274,"co":204,"lula":102,"flav":74,"cury":3,"renan":7,"caiado":6,"zema":1,"out":0,"br":7,"nu":4,"age":[4,20,44,56,48,48,53],"fem":131,"mas":141,"ag":[]},{"s":61,"l":1163,"ap":274,"co":204,"lula":98,"flav":77,"cury":8,"renan":5,"caiado":6,"zema":3,"out":0,"br":4,"nu":3,"age":[3,13,42,54,62,55,48],"fem":148,"mas":129,"ag":[]},{"s":62,"l":1163,"ap":278,"co":219,"lula":108,"flav":77,"cury":7,"renan":4,"caiado":4,"zema":0,"out":2,"br":6,"nu":11,"age":[2,5,47,55,117,27,25],"fem":144,"mas":134,"ag":[]},{"s":63,"l":1171,"ap":282,"co":202,"lula":111,"flav":62,"cury":5,"renan":1,"caiado":2,"zema":3,"out":0,"br":7,"nu":11,"age":[1,19,39,50,43,65,67],"fem":150,"mas":134,"ag":[]},{"s":64,"l":1171,"ap":278,"co":199,"lula":106,"flav":56,"cury":5,"renan":7,"caiado":3,"zema":1,"out":1,"br":5,"nu":15,"age":[3,28,25,52,53,59,59],"fem":146,"mas":133,"ag":[]},{"s":65,"l":1171,"ap":281,"co":195,"lula":107,"flav":72,"cury":0,"renan":0,"caiado":6,"zema":4,"out":1,"br":3,"nu":2,"age":[2,26,30,43,55,61,64],"fem":153,"mas":128,"ag":[]},{"s":66,"l":1171,"ap":276,"co":213,"lula":124,"flav":59,"cury":4,"renan":6,"caiado":2,"zema":3,"out":0,"br":3,"nu":12,"age":[4,23,35,51,49,63,52],"fem":155,"mas":122,"ag":[]},{"s":67,"l":1686,"ap":277,"co":193,"lula":102,"flav":68,"cury":4,"renan":4,"caiado":1,"zema":0,"out":0,"br":7,"nu":7,"age":[0,30,25,66,61,49,46],"fem":143,"mas":134,"ag":[]},{"s":68,"l":1686,"ap":280,"co":222,"lula":124,"flav":59,"cury":12,"renan":4,"caiado":4,"zema":1,"out":0,"br":9,"nu":9,"age":[0,31,28,38,118,42,23],"fem":147,"mas":133,"ag":[]},{"s":69,"l":1180,"ap":394,"co":301,"lula":135,"flav":118,"cury":5,"renan":9,"caiado":10,"zema":5,"out":0,"br":8,"nu":11,"age":[1,39,60,76,68,89,62],"fem":207,"mas":188,"ag":[]},{"s":70,"l":1180,"ap":398,"co":306,"lula":151,"flav":115,"cury":5,"renan":9,"caiado":7,"zema":2,"out":1,"br":6,"nu":10,"age":[2,38,61,73,82,69,74],"fem":228,"mas":171,"ag":[]},{"s":71,"l":1180,"ap":388,"co":291,"lula":137,"flav":101,"cury":11,"renan":9,"caiado":9,"zema":2,"out":0,"br":9,"nu":13,"age":[1,41,47,72,126,47,59],"fem":209,"mas":184,"ag":[]},{"s":72,"l":1198,"ap":200,"co":158,"lula":83,"flav":55,"cury":3,"renan":2,"caiado":3,"zema":1,"out":0,"br":3,"nu":8,"age":[2,7,10,44,25,57,55],"fem":108,"mas":92,"ag":[]},{"s":73,"l":1198,"ap":202,"co":153,"lula":80,"flav":59,"cury":2,"renan":1,"caiado":1,"zema":3,"out":0,"br":4,"nu":3,"age":[0,2,7,37,54,45,59],"fem":102,"mas":102,"ag":[]},{"s":74,"l":1201,"ap":250,"co":188,"lula":84,"flav":82,"cury":2,"renan":5,"caiado":2,"zema":1,"out":1,"br":4,"nu":7,"age":[0,14,37,54,24,64,57],"fem":144,"mas":106,"ag":[]},{"s":75,"l":1201,"ap":244,"co":170,"lula":85,"flav":65,"cury":6,"renan":3,"caiado":4,"zema":0,"out":0,"br":1,"nu":6,"age":[0,13,42,48,31,46,64],"fem":127,"mas":117,"ag":[]},{"s":76,"l":1201,"ap":247,"co":181,"lula":97,"flav":63,"cury":4,"renan":3,"caiado":1,"zema":2,"out":0,"br":4,"nu":7,"age":[0,9,35,72,61,33,38],"fem":140,"mas":108,"ag":[]},{"s":77,"l":1210,"ap":265,"co":189,"lula":85,"flav":83,"cury":5,"renan":2,"caiado":5,"zema":1,"out":0,"br":4,"nu":4,"age":[3,11,32,51,36,65,69],"fem":143,"mas":124,"ag":[]},{"s":78,"l":1210,"ap":267,"co":185,"lula":91,"flav":65,"cury":6,"renan":7,"caiado":4,"zema":2,"out":0,"br":2,"nu":8,"age":[2,15,27,80,20,62,62],"fem":153,"mas":115,"ag":[]},{"s":79,"l":1210,"ap":264,"co":190,"lula":96,"flav":74,"cury":5,"renan":4,"caiado":3,"zema":2,"out":0,"br":2,"nu":4,"age":[1,20,27,65,35,49,68],"fem":148,"mas":117,"ag":[]},{"s":80,"l":1210,"ap":268,"co":212,"lula":108,"flav":73,"cury":8,"renan":4,"caiado":6,"zema":1,"out":0,"br":5,"nu":7,"age":[0,16,33,64,40,56,60],"fem":143,"mas":125,"ag":[]},{"s":81,"l":1210,"ap":266,"co":206,"lula":99,"flav":81,"cury":9,"renan":1,"caiado":5,"zema":0,"out":2,"br":3,"nu":6,"age":[1,12,25,69,83,40,36],"fem":139,"mas":127,"ag":[]},{"s":82,"l":1228,"ap":203,"co":150,"lula":67,"flav":64,"cury":6,"renan":3,"caiado":2,"zema":0,"out":2,"br":3,"nu":3,"age":[0,18,13,28,39,49,57],"fem":110,"mas":94,"ag":[]},{"s":83,"l":1228,"ap":206,"co":158,"lula":82,"flav":54,"cury":2,"renan":0,"caiado":3,"zema":1,"out":0,"br":7,"nu":9,"age":[0,8,13,23,68,43,50],"fem":115,"mas":90,"ag":[]},{"s":84,"l":1236,"ap":353,"co":263,"lula":131,"flav":101,"cury":6,"renan":8,"caiado":7,"zema":1,"out":0,"br":3,"nu":6,"age":[0,5,27,46,94,85,94],"fem":180,"mas":169,"ag":[85]},{"s":86,"l":1244,"ap":344,"co":260,"lula":172,"flav":67,"cury":1,"renan":1,"caiado":7,"zema":1,"out":0,"br":2,"nu":9,"age":[2,20,61,48,62,77,71],"fem":157,"mas":184,"ag":[]},{"s":87,"l":1244,"ap":342,"co":272,"lula":156,"flav":87,"cury":2,"renan":8,"caiado":3,"zema":1,"out":0,"br":8,"nu":7,"age":[2,17,57,77,107,48,31],"fem":153,"mas":186,"ag":[]},{"s":88,"l":1252,"ap":224,"co":167,"lula":105,"flav":43,"cury":4,"renan":3,"caiado":2,"zema":0,"out":1,"br":7,"nu":2,"age":[0,22,19,27,43,56,57],"fem":119,"mas":105,"ag":[]},{"s":89,"l":1252,"ap":223,"co":183,"lula":125,"flav":36,"cury":3,"renan":1,"caiado":0,"zema":1,"out":0,"br":5,"nu":12,"age":[1,11,16,50,102,27,17],"fem":105,"mas":119,"ag":[]},{"s":90,"l":1260,"ap":263,"co":194,"lula":121,"flav":50,"cury":9,"renan":2,"caiado":3,"zema":2,"out":0,"br":2,"nu":5,"age":[0,16,45,23,44,60,73],"fem":124,"mas":136,"ag":[]},{"s":91,"l":1260,"ap":261,"co":206,"lula":133,"flav":58,"cury":6,"renan":0,"caiado":2,"zema":0,"out":0,"br":1,"nu":6,"age":[2,17,33,66,94,31,16],"fem":117,"mas":142,"ag":[]},{"s":92,"l":1279,"ap":253,"co":174,"lula":102,"flav":37,"cury":6,"renan":4,"caiado":8,"zema":1,"out":0,"br":6,"nu":10,"age":[1,14,35,40,57,67,40],"fem":121,"mas":133,"ag":[]},{"s":93,"l":1279,"ap":254,"co":179,"lula":117,"flav":42,"cury":4,"renan":3,"caiado":2,"zema":1,"out":0,"br":6,"nu":4,"age":[0,12,26,37,84,46,49],"fem":114,"mas":140,"ag":[]},{"s":94,"l":1287,"ap":348,"co":238,"lula":129,"flav":72,"cury":4,"renan":2,"caiado":13,"zema":0,"out":0,"br":6,"nu":12,"age":[3,20,44,57,86,56,81],"fem":159,"mas":188,"ag":[96]},{"s":95,"l":1287,"ap":326,"co":240,"lula":133,"flav":74,"cury":2,"renan":7,"caiado":9,"zema":0,"out":1,"br":9,"nu":5,"age":[5,23,51,60,99,43,48],"fem":158,"mas":171,"ag":[97]},{"s":98,"l":1317,"ap":329,"co":219,"lula":119,"flav":72,"cury":5,"renan":2,"caiado":4,"zema":1,"out":0,"br":9,"nu":7,"age":[1,18,17,70,99,46,80],"fem":157,"mas":174,"ag":[100]},{"s":99,"l":1317,"ap":334,"co":214,"lula":107,"flav":69,"cury":5,"renan":5,"caiado":5,"zema":2,"out":0,"br":13,"nu":8,"age":[1,21,61,56,66,56,73],"fem":165,"mas":169,"ag":[101]},{"s":102,"l":1333,"ap":397,"co":316,"lula":145,"flav":131,"cury":9,"renan":5,"caiado":4,"zema":2,"out":3,"br":6,"nu":11,"age":[1,29,48,57,171,52,40],"fem":205,"mas":193,"ag":[]},{"s":103,"l":1376,"ap":317,"co":253,"lula":134,"flav":86,"cury":9,"renan":5,"caiado":5,"zema":0,"out":0,"br":3,"nu":11,"age":[1,24,41,39,164,24,24],"fem":162,"mas":155,"ag":[]},{"s":104,"l":1384,"ap":250,"co":202,"lula":95,"flav":86,"cury":7,"renan":0,"caiado":5,"zema":0,"out":1,"br":8,"nu":0,"age":[2,12,5,51,126,25,29],"fem":129,"mas":121,"ag":[]},{"s":105,"l":1368,"ap":333,"co":274,"lula":137,"flav":101,"cury":8,"renan":7,"caiado":6,"zema":2,"out":0,"br":3,"nu":10,"age":[2,9,69,41,161,31,21],"fem":175,"mas":158,"ag":[]},{"s":106,"l":1341,"ap":388,"co":309,"lula":180,"flav":96,"cury":10,"renan":4,"caiado":5,"zema":2,"out":0,"br":4,"nu":8,"age":[3,44,46,41,193,42,19],"fem":208,"mas":180,"ag":[]},{"s":107,"l":1333,"ap":397,"co":312,"lula":160,"flav":99,"cury":8,"renan":6,"caiado":5,"zema":10,"out":0,"br":12,"nu":12,"age":[2,28,42,42,203,42,38],"fem":202,"mas":195,"ag":[]},{"s":108,"l":1350,"ap":355,"co":278,"lula":154,"flav":87,"cury":11,"renan":5,"caiado":6,"zema":0,"out":1,"br":6,"nu":8,"age":[1,51,63,29,177,20,16],"fem":168,"mas":189,"ag":[]},{"s":110,"l":1341,"ap":380,"co":310,"lula":136,"flav":132,"cury":7,"renan":11,"caiado":9,"zema":0,"out":2,"br":6,"nu":7,"age":[2,39,48,52,199,26,17],"fem":187,"mas":196,"ag":[]},{"s":111,"l":1422,"ap":235,"co":201,"lula":125,"flav":62,"cury":6,"renan":0,"caiado":1,"zema":0,"out":0,"br":5,"nu":2,"age":[0,20,43,54,66,26,26],"fem":103,"mas":132,"ag":[]},{"s":112,"l":1430,"ap":158,"co":136,"lula":86,"flav":39,"cury":6,"renan":0,"caiado":2,"zema":1,"out":0,"br":2,"nu":0,"age":[1,13,34,37,34,24,15],"fem":77,"mas":81,"ag":[]},{"s":114,"l":1392,"ap":311,"co":249,"lula":129,"flav":94,"cury":6,"renan":4,"caiado":2,"zema":3,"out":1,"br":4,"nu":6,"age":[5,22,29,79,142,20,13],"fem":154,"mas":156,"ag":[]},{"s":115,"l":1406,"ap":292,"co":243,"lula":104,"flav":110,"cury":6,"renan":6,"caiado":5,"zema":1,"out":0,"br":5,"nu":6,"age":[1,13,24,78,142,19,16],"fem":169,"mas":124,"ag":[]},{"s":118,"l":1333,"ap":397,"co":308,"lula":144,"flav":132,"cury":5,"renan":2,"caiado":7,"zema":1,"out":0,"br":7,"nu":10,"age":[3,26,50,51,162,58,47],"fem":232,"mas":165,"ag":[]},{"s":119,"l":1449,"ap":306,"co":243,"lula":120,"flav":82,"cury":8,"renan":2,"caiado":4,"zema":1,"out":1,"br":10,"nu":15,"age":[2,14,23,56,172,24,16],"fem":157,"mas":150,"ag":[]},{"s":120,"l":1384,"ap":245,"co":200,"lula":90,"flav":85,"cury":9,"renan":3,"caiado":2,"zema":0,"out":0,"br":3,"nu":8,"age":[1,9,23,80,104,15,17],"fem":125,"mas":124,"ag":[]},{"s":121,"l":1341,"ap":386,"co":314,"lula":132,"flav":133,"cury":10,"renan":11,"caiado":10,"zema":1,"out":0,"br":11,"nu":6,"age":[2,44,39,50,200,29,22],"fem":197,"mas":189,"ag":[]},{"s":122,"l":1350,"ap":357,"co":297,"lula":157,"flav":110,"cury":4,"renan":3,"caiado":2,"zema":3,"out":1,"br":10,"nu":7,"age":[1,30,54,112,132,18,14],"fem":179,"mas":182,"ag":[]},{"s":123,"l":1163,"ap":277,"co":217,"lula":112,"flav":75,"cury":7,"renan":6,"caiado":1,"zema":2,"out":0,"br":7,"nu":7,"age":[3,14,51,130,63,13,2],"fem":143,"mas":133,"ag":[]},{"s":124,"l":1341,"ap":383,"co":304,"lula":127,"flav":122,"cury":9,"renan":11,"caiado":4,"zema":3,"out":3,"br":13,"nu":12,"age":[0,46,50,126,120,24,22],"fem":208,"mas":180,"ag":[]},{"s":150,"l":1350,"ap":357,"co":268,"lula":146,"flav":99,"cury":2,"renan":6,"caiado":5,"zema":1,"out":0,"br":5,"nu":4,"age":[4,36,52,176,54,26,10],"fem":170,"mas":188,"ag":[]},{"s":152,"l":1392,"ap":304,"co":246,"lula":100,"flav":113,"cury":14,"renan":3,"caiado":3,"zema":0,"out":3,"br":4,"nu":6,"age":[0,9,98,111,45,31,13],"fem":180,"mas":127,"ag":[]},{"s":157,"l":1490,"ap":357,"co":280,"lula":150,"flav":88,"cury":9,"renan":8,"caiado":8,"zema":2,"out":1,"br":6,"nu":8,"age":[4,25,49,197,24,31,25],"fem":178,"mas":177,"ag":[]},{"s":159,"l":1252,"ap":248,"co":199,"lula":136,"flav":45,"cury":5,"renan":1,"caiado":2,"zema":1,"out":2,"br":3,"nu":4,"age":[2,25,90,56,21,29,25],"fem":126,"mas":122,"ag":[116]},{"s":160,"l":1520,"ap":391,"co":294,"lula":158,"flav":91,"cury":14,"renan":7,"caiado":5,"zema":2,"out":0,"br":10,"nu":7,"age":[1,23,116,104,80,39,30],"fem":200,"mas":193,"ag":[]},{"s":161,"l":1538,"ap":366,"co":294,"lula":171,"flav":87,"cury":10,"renan":1,"caiado":1,"zema":3,"out":0,"br":10,"nu":11,"age":[1,25,145,90,51,35,18],"fem":189,"mas":176,"ag":[]},{"s":162,"l":1511,"ap":355,"co":274,"lula":136,"flav":110,"cury":5,"renan":8,"caiado":3,"zema":0,"out":0,"br":6,"nu":6,"age":[0,44,139,60,51,36,25],"fem":197,"mas":158,"ag":[]},{"s":163,"l":1546,"ap":351,"co":271,"lula":164,"flav":82,"cury":6,"renan":3,"caiado":3,"zema":0,"out":0,"br":5,"nu":8,"age":[0,58,151,60,37,27,18],"fem":186,"mas":165,"ag":[]},{"s":165,"l":1589,"ap":258,"co":176,"lula":149,"flav":18,"cury":2,"renan":1,"caiado":0,"zema":0,"out":0,"br":5,"nu":1,"age":[2,25,47,27,89,33,35],"fem":114,"mas":143,"ag":[166]},{"s":167,"l":1490,"ap":347,"co":260,"lula":145,"flav":81,"cury":11,"renan":4,"caiado":6,"zema":2,"out":0,"br":7,"nu":4,"age":[1,55,187,27,35,27,18],"fem":175,"mas":175,"ag":[]},{"s":168,"l":1341,"ap":384,"co":300,"lula":159,"flav":95,"cury":15,"renan":13,"caiado":7,"zema":3,"out":0,"br":4,"nu":4,"age":[1,38,219,26,48,36,19],"fem":209,"mas":178,"ag":[]},{"s":170,"l":1538,"ap":366,"co":296,"lula":170,"flav":93,"cury":7,"renan":6,"caiado":5,"zema":0,"out":1,"br":5,"nu":9,"age":[0,21,204,25,68,37,12],"fem":194,"mas":173,"ag":[]},{"s":172,"l":1635,"ap":227,"co":198,"lula":100,"flav":58,"cury":12,"renan":2,"caiado":10,"zema":1,"out":0,"br":11,"nu":4,"age":[1,26,65,39,48,36,11],"fem":107,"mas":119,"ag":[]},{"s":173,"l":1627,"ap":96,"co":79,"lula":44,"flav":26,"cury":3,"renan":2,"caiado":1,"zema":0,"out":0,"br":2,"nu":1,"age":[0,17,24,7,21,13,12],"fem":50,"mas":44,"ag":[]},{"s":174,"l":1619,"ap":248,"co":215,"lula":130,"flav":54,"cury":10,"renan":5,"caiado":6,"zema":0,"out":1,"br":7,"nu":2,"age":[5,34,69,33,45,44,18],"fem":140,"mas":108,"ag":[]},{"s":175,"l":1163,"ap":277,"co":230,"lula":112,"flav":77,"cury":6,"renan":15,"caiado":5,"zema":0,"out":1,"br":8,"nu":6,"age":[0,106,50,32,44,26,21],"fem":157,"mas":122,"ag":[]},{"s":177,"l":1520,"ap":394,"co":311,"lula":163,"flav":101,"cury":10,"renan":9,"caiado":6,"zema":3,"out":1,"br":9,"nu":9,"age":[1,25,180,43,65,51,30],"fem":229,"mas":166,"ag":[]},{"s":178,"l":1538,"ap":372,"co":277,"lula":169,"flav":65,"cury":13,"renan":6,"caiado":3,"zema":2,"out":1,"br":11,"nu":7,"age":[2,30,201,31,52,38,19],"fem":190,"mas":183,"ag":[]},{"s":179,"l":1511,"ap":363,"co":297,"lula":154,"flav":103,"cury":6,"renan":12,"caiado":3,"zema":5,"out":0,"br":6,"nu":8,"age":[2,66,141,31,62,50,13],"fem":209,"mas":156,"ag":[]},{"s":181,"l":1520,"ap":392,"co":312,"lula":144,"flav":107,"cury":13,"renan":8,"caiado":5,"zema":2,"out":2,"br":15,"nu":16,"age":[0,51,167,51,69,43,13],"fem":219,"mas":175,"ag":[]},{"s":182,"l":1066,"ap":118,"co":107,"lula":72,"flav":25,"cury":1,"renan":0,"caiado":1,"zema":0,"out":0,"br":6,"nu":2,"age":[1,7,21,15,35,26,13],"fem":60,"mas":58,"ag":[]},{"s":188,"l":1546,"ap":376,"co":286,"lula":150,"flav":94,"cury":11,"renan":11,"caiado":6,"zema":1,"out":0,"br":7,"nu":6,"age":[0,83,103,40,73,46,32],"fem":225,"mas":152,"ag":[]},{"s":189,"l":1538,"ap":386,"co":300,"lula":170,"flav":80,"cury":9,"renan":6,"caiado":8,"zema":0,"out":1,"br":10,"nu":16,"age":[2,54,109,41,90,54,39],"fem":210,"mas":179,"ag":[]},{"s":190,"l":1490,"ap":359,"co":290,"lula":166,"flav":77,"cury":6,"renan":14,"caiado":5,"zema":0,"out":3,"br":12,"nu":7,"age":[2,61,118,50,67,37,23],"fem":195,"mas":163,"ag":[]},{"s":194,"l":1538,"ap":390,"co":307,"lula":181,"flav":84,"cury":2,"renan":12,"caiado":4,"zema":1,"out":2,"br":11,"nu":10,"age":[0,243,53,27,39,19,7],"fem":208,"mas":180,"ag":[]},{"s":196,"l":1325,"ap":107,"co":67,"lula":29,"flav":29,"cury":0,"renan":3,"caiado":2,"zema":0,"out":1,"br":0,"nu":3,"age":[7,37,9,7,10,8,26],"fem":47,"mas":57,"ag":[]},{"s":198,"l":1546,"ap":175,"co":155,"lula":103,"flav":34,"cury":1,"renan":3,"caiado":1,"zema":1,"out":1,"br":6,"nu":5,"age":[4,32,30,29,36,31,12],"fem":92,"mas":82,"ag":[]},{"s":199,"l":1511,"ap":148,"co":135,"lula":80,"flav":37,"cury":2,"renan":1,"caiado":2,"zema":1,"out":1,"br":4,"nu":7,"age":[4,40,19,20,28,25,9],"fem":77,"mas":68,"ag":[]},{"s":200,"l":1538,"ap":183,"co":168,"lula":96,"flav":45,"cury":4,"renan":7,"caiado":3,"zema":1,"out":0,"br":3,"nu":9,"age":[10,35,21,24,50,37,6],"fem":114,"mas":69,"ag":[]}],"locais":[{"id":1554,"nome":"E.M. ANITA SOARES DULCI","bairro":"Centro","end":"Avenida Rui Barbosa","lat":-21.456906,"lon":-43.556236},{"id":1201,"nome":"E.M. CANARINHOS BRASILEIROS","bairro":"Centro","end":"Avenida Presidente Getúlio Vargas, 330","lat":-21.460356,"lon":-43.552143},{"id":1082,"nome":"FUNDAÇÃO FUTURO BRASIL","bairro":"Centro","end":"Rua 13 De Maio, N. 350","lat":-21.459256,"lon":-43.551255},{"id":1627,"nome":"E.M. VICTOR BITTENCOURT DOS SANTOS - AGUA ESPRAIADA","bairro":"Água Espraiada","end":"Rua Carlos Da Silva Fortes, S/N","lat":-21.478873,"lon":-43.550758},{"id":1210,"nome":"FACULDADE SANTOS DUMONT","bairro":"Centro","end":"Av. Getúlio Vargas, 547","lat":-21.45895,"lon":-43.551702},{"id":1350,"nome":"E.E. GOVERNADOR BIAS FORTES","bairro":"Quarto Depósito","end":"Rua José Anunciação Paes, 20","lat":-21.471767,"lon":-43.544657},{"id":1252,"nome":"E.M. DA VILA DE CAMPO ALEGRE","bairro":"Zona Rural","end":"Campo Alegre","lat":-21.419699,"lon":-43.516003},{"id":1171,"nome":"E.E. VIEIRA MARQUES","bairro":"Centro","end":"Av. Rui Barbosa  , 201","lat":-21.456086,"lon":-43.555012},{"id":1317,"nome":"E.M. JOÃO MAZILÃO","bairro":"Zona Rural","end":"São João Da Serra","lat":-21.47543,"lon":-43.436084},{"id":1260,"nome":"E.M. MARIA CÂNDIDA","bairro":"Zona Rural","end":"Mantiqueira","lat":-21.447229,"lon":-43.654158},{"id":1031,"nome":"SECRETARIA MUNICIPAL DE EDUCAÇÃO E CULTURA","bairro":"Centro","end":"Av. Presidente Getúlio Vargas, 563","lat":-21.459086,"lon":-43.551873},{"id":1635,"nome":"E.M. OSORIO AZEVEDO - PONTE PRETA","bairro":"Ponte Preta","end":"Rua Giovanne Peduzzi, S/N","lat":-21.443828,"lon":-43.518967},{"id":1341,"nome":"E.E. DOUTOR VIEIRA BRAGA","bairro":"São Sebastião","end":"Rua Quinze De Fevereiro, 1950","lat":-21.46941,"lon":-43.547738},{"id":1198,"nome":"CENTRO EDUCACIONAL DA CRIANÇA","bairro":"Centro","end":"Rua Josefina Ladeira, 43","lat":-21.455271,"lon":-43.552643},{"id":1120,"nome":"COLÉGIO SANTOS DUMONT","bairro":"Centro","end":"Av. Rui Barbosa, 348","lat":-21.457185,"lon":-43.556671},{"id":1490,"nome":"IF SUDESTE - SANTOS DUMONT","bairro":"Quarto Depósito","end":"Rua Técnico Panamá, N.45","lat":-21.468722,"lon":-43.542773},{"id":1333,"nome":"SALÃO PAROQUIAL DA IGREJA DE SÃO SEBASTIÃO","bairro":"São Sebastião","end":"Rua Quinze De Fevereiro","lat":-21.467444,"lon":-43.55102},{"id":1449,"nome":"E.M. GIOVANNI PEDUZZI","bairro":"Centro","end":"Rua Ayssar Salomão Couri, 55","lat":-21.455737,"lon":-43.548717},{"id":1040,"nome":"FORUM DES. MÁRCIO MARINS","bairro":"Centro","end":"Rua Galileu Fonseca N.113","lat":-21.454822,"lon":-43.554859},{"id":1163,"nome":"E.E. PRESIDENTE JOÃO PINHEIRO","bairro":"Centro","end":"Rua Padre João, 120","lat":-21.45469,"lon":-43.554173},{"id":1074,"nome":"CONSERVATÓRIO ARTÍSTICO E MUSICAL J. SEBASTIAN BACH","bairro":"Centro","end":"Rua Coronel Severiano Rezende, 87","lat":-21.455745,"lon":-43.548446},{"id":1287,"nome":"E.M. PROF. MARIA APARECIDA DIAS (DORES DO PARAIBUNA)","bairro":"Zona Rural","end":"Dores Do Paraibuna","lat":-21.507082,"lon":-43.6102},{"id":1589,"nome":"E.M. MARIA DA GLÓRIA DE CARVALHO VILLANOVA","bairro":"Cachoeirinha","end":"Cachoeirinha","lat":-21.522571,"lon":-43.66769},{"id":1570,"nome":"CENTRO CULTURAL PAULO DE PAULA - CEFEC","bairro":"Centro","end":"Praça Da Estação, S/N","lat":-21.455882,"lon":-43.5496},{"id":1112,"nome":"NÚCLEO DE ENSINO ARCO-IRIS (APOGEU)","bairro":"Centro","end":"Rua Afonso Pena, 164","lat":-21.455766,"lon":-43.553823},{"id":1546,"nome":"E.E. PROFESSORA JOANA CUNHA","bairro":"Vila Esperança","end":"Rua Antônio Paticie, 30","lat":-21.466204,"lon":-43.54849},{"id":1511,"nome":"E.E. JOÃO GOMES VELHO","bairro":"Santo Antônio","end":"Rua José Carlos De Paula, 1526","lat":-21.464421,"lon":-43.56831},{"id":1279,"nome":"E.M. DO FORMOSO","bairro":"Zona Rural","end":"Conceição Do Formoso","lat":-21.424718,"lon":-43.356037},{"id":1686,"nome":"CAPS DE SANTOS DUMONT","bairro":"Centro","end":"Rua Francisco Ladeira, 52","lat":-21.456761,"lon":-43.55555},{"id":1090,"nome":"FORUM DO JUIZADO ESPECIAL","bairro":"Centro","end":"Rua Afonso Pena, 258","lat":-21.456461,"lon":-43.554424},{"id":1430,"nome":"E.M. JOSÉ CARLOS DE PAULA","bairro":"Zona Rural","end":"Posses","lat":-21.461617,"lon":-43.631754},{"id":1619,"nome":"E.M. JOAQUIM CHAVES - ANTONIO AFONSO","bairro":"Antônio Afonso","end":"Rua Ouvidio Rufino, S/N","lat":-21.452897,"lon":-43.53307},{"id":1538,"nome":"E.E. PADRE ANTÔNIO VIEIRA","bairro":"Córrego Do Ouro","end":"Rua Projeto, 12","lat":-21.452588,"lon":-43.53336},{"id":1384,"nome":"CENTRO COMUNITÁRIO SÃO MIGUEL","bairro":"Centro","end":"Praça Cesário Alvim","lat":-21.456362,"lon":-43.552558},{"id":1422,"nome":"E.M. VIGÁRIO RAIMUNDO","bairro":"Zona Rural","end":"Patrimônio Dos Paivas","lat":-21.399941,"lon":-43.633158},{"id":1180,"nome":"GREMIO LITERÁRIO RECREATIVO MÁRIO DE LIMA","bairro":"Centro","end":"Av. Presidente Getúlio Vargas, 64","lat":-21.454281,"lon":-43.552545},{"id":1600,"nome":"SECRETARIA MUNICIPAL DE DESENVOLVIMENTO SOCIAL E COMBATE ÀS DROGAS","bairro":"Centro","end":"Avenida Presidente Getúlio Vargas, 149 (Edifício Abdo)","lat":-21.457111,"lon":-43.550556},{"id":1104,"nome":"ESCOLA PROMOVE","bairro":"Centro","end":"Rua 13 De Maio, 226","lat":-21.458361,"lon":-43.550774},{"id":1465,"nome":"EBCT - E.B. DE CORREIOS E TELÉGRAFOS","bairro":"Centro","end":"Rua Prefeito José Maria Pittella, 23","lat":-21.455642,"lon":-43.550897},{"id":1368,"nome":"LOJA MAÇÔNICA ANTENOR AIRES VIANA","bairro":"Centro","end":"Avenida Presidente Getúlio Vargas","lat":-21.45483,"lon":-43.552391},{"id":1520,"nome":"E.E. CORNÉLIA FERREIRA LADEIRA","bairro":"Glória","end":"Rua Presidente Juscelino Kubstcheck, 187","lat":-21.453205,"lon":-43.567976},{"id":1392,"nome":"E. M. DE EDUCAÇÃO INFANTIL ELIZABETH BLANKENDAAL (CANTINA DO GURI)","bairro":"Centro","end":"R Vigário Jose De Luca, 05","lat":-21.456825,"lon":-43.553867},{"id":1376,"nome":"CEMIG - COMPANHIA ENERGÉTICA DE MINAS GERAIS","bairro":"Centro","end":"Rua Coronel Serrado, N.19","lat":-21.4566,"lon":-43.552678},{"id":1244,"nome":"E.M. ANTONIO FAGUNDES NETTO","bairro":"Zona Rural","end":"Perobas - Br 040","lat":-21.402848,"lon":-43.566781},{"id":1066,"nome":"E.M. JACINTO SANTOS","bairro":"Zona Rural","end":"Patrimônio Da Serra","lat":-21.486945,"lon":-43.507071},{"id":1228,"nome":"ASSOCIAÇÃO DE PAIS E AMIGOS DOS EXCEPCIONAIS - APAE","bairro":"Centro","end":"Rua 13 De Maio, 302","lat":-21.458943,"lon":-43.551132},{"id":1236,"nome":"QUADRA DO BLOCO DA BIQUINHA","bairro":"Centro","end":"Rua 13 De Maio, S/N","lat":-21.459099,"lon":-43.551195},{"id":1139,"nome":"COLÉGIO MUNICIPAL SÃO JOSÉ","bairro":"Centro","end":"Av. Presidente Getúlio Vargas, 547","lat":-21.458777,"lon":-43.551801},{"id":1155,"nome":"TANGARÁ TENIS CLUBE","bairro":"Centro","end":"Rua Cel. Severiano De Rezende","lat":-21.455398,"lon":-43.549001},{"id":1406,"nome":"INSS","bairro":"Centro","end":"Manoel De Paula, 30","lat":-21.457552,"lon":-43.550537},{"id":1660,"nome":"DEFENSORIA PÚBLICA ESTADUAL","bairro":"Centro","end":"Rua Afonso Pena, N. 365","lat":-21.457411,"lon":-43.555022},{"id":1325,"nome":"E. E. ENGENHEIRO HENRIQUE DUMONT (POLIVALENTE)","bairro":"São Sebastião","end":"Rua Otávio Soares, N.384","lat":-21.469749,"lon":-43.555373},{"id":1023,"nome":"SUPERINTENDÊNCIA MUNICIPAL DE RECURSOS HUMANOS (ANTIGA OI)","bairro":"Centro","end":"Praça Cesário Alvim, 55","lat":-21.456038,"lon":-43.552877}],"c22":{"Antônio Afonso":{"t1":{"ap":196,"co":177,"lula":115,"bolso":36,"br":3,"nu":2,"out":21},"t2":{"ap":196,"co":181,"lula":126,"bolso":52,"br":1,"nu":2,"out":0}},"Cachoeirinha":{"t1":{"ap":248,"co":170,"lula":146,"bolso":9,"br":2,"nu":4,"out":9},"t2":{"ap":248,"co":183,"lula":168,"bolso":12,"br":2,"nu":1,"out":0}},"Centro":{"t1":{"ap":23844,"co":18373,"lula":9872,"bolso":6065,"br":354,"nu":570,"out":1512},"t2":{"ap":23844,"co":18627,"lula":10627,"bolso":7173,"br":260,"nu":567,"out":0}},"Córrego Do Ouro":{"t1":{"ap":1693,"co":1394,"lula":900,"bolso":321,"br":33,"nu":44,"out":96},"t2":{"ap":1693,"co":1414,"lula":921,"bolso":433,"br":20,"nu":40,"out":0}},"Glória":{"t1":{"ap":1172,"co":940,"lula":511,"bolso":297,"br":27,"nu":34,"out":71},"t2":{"ap":1172,"co":963,"lula":566,"bolso":344,"br":22,"nu":31,"out":0}},"Ponte Preta":{"t1":{"ap":173,"co":154,"lula":104,"bolso":33,"br":3,"nu":1,"out":13},"t2":{"ap":173,"co":155,"lula":109,"bolso":40,"br":3,"nu":3,"out":0}},"Quarto Depósito":{"t1":{"ap":2031,"co":1667,"lula":965,"bolso":529,"br":34,"nu":30,"out":109},"t2":{"ap":2031,"co":1661,"lula":998,"bolso":612,"br":22,"nu":29,"out":0}},"Santo Antônio":{"t1":{"ap":730,"co":602,"lula":339,"bolso":201,"br":7,"nu":9,"out":46},"t2":{"ap":730,"co":606,"lula":348,"bolso":246,"br":4,"nu":8,"out":0}},"São Sebastião":{"t1":{"ap":3087,"co":2513,"lula":1284,"bolso":924,"br":38,"nu":63,"out":204},"t2":{"ap":3087,"co":2588,"lula":1402,"bolso":1082,"br":37,"nu":67,"out":0}},"Vila Esperança":{"t1":{"ap":699,"co":600,"lula":367,"bolso":164,"br":16,"nu":14,"out":39},"t2":{"ap":699,"co":597,"lula":370,"bolso":202,"br":12,"nu":13,"out":0}},"Zona Rural":{"t1":{"ap":4460,"co":3404,"lula":2261,"bolso":750,"br":60,"nu":108,"out":225},"t2":{"ap":4460,"co":3425,"lula":2366,"bolso":932,"br":52,"nu":75,"out":0}},"Água Espraiada":{"t1":{"ap":80,"co":66,"lula":35,"bolso":20,"br":3,"nu":1,"out":7},"t2":{"ap":80,"co":65,"lula":38,"bolso":24,"br":2,"nu":1,"out":0}},"_cidade":{"t1":{"ap":38413,"co":30060,"lula":16899,"bolso":9349,"br":580,"nu":880,"out":2352},"t2":{"ap":38415,"co":30465,"lula":18039,"bolso":11152,"br":437,"nu":837,"out":0}}},"absAge":[[191,25],[3336,659],[6490,1515],[6723,1396],[9370,1330],[6004,662],[5525,3194]],"absAgeF":[[109,11],[1674,267],[3315,666],[3441,595],[4895,594],[3111,327],[3265,2015]],"absAgeM":[[82,14],[1662,392],[3175,849],[3282,801],[4471,736],[2890,335],[2255,1174]],"absSex":{"FEMININO":[19810,4475],"MASCULINO":[17817,4301],"NÃO INFORMADO":[12,5]},"c22l":{"1023":{"ap":291,"t1":{"lula":106,"bolso":65,"br":5,"nu":10,"out":18},"t2":{"lula":110,"bolso":80,"br":5,"nu":13,"out":0}},"1031":{"ap":240,"t1":{"lula":74,"bolso":72,"br":5,"nu":8,"out":14},"t2":{"lula":85,"bolso":84,"br":1,"nu":5,"out":0}},"1040":{"ap":545,"t1":{"lula":203,"bolso":135,"br":8,"nu":16,"out":41},"t2":{"lula":225,"bolso":174,"br":5,"nu":13,"out":0}},"1058":{"ap":0,"t1":{"lula":68,"bolso":61,"br":0,"nu":11,"out":14},"t2":{"lula":81,"bolso":65,"br":0,"nu":6,"out":0}},"1066":{"ap":111,"t1":{"lula":73,"bolso":18,"br":0,"nu":2,"out":4},"t2":{"lula":71,"bolso":23,"br":1,"nu":2,"out":0}},"1074":{"ap":585,"t1":{"lula":277,"bolso":116,"br":12,"nu":16,"out":27},"t2":{"lula":294,"bolso":138,"br":12,"nu":12,"out":0}},"1082":{"ap":465,"t1":{"lula":169,"bolso":127,"br":6,"nu":9,"out":28},"t2":{"lula":182,"bolso":154,"br":4,"nu":9,"out":0}},"1090":{"ap":539,"t1":{"lula":218,"bolso":132,"br":7,"nu":5,"out":28},"t2":{"lula":240,"bolso":150,"br":5,"nu":11,"out":0}},"1104":{"ap":692,"t1":{"lula":279,"bolso":174,"br":6,"nu":16,"out":39},"t2":{"lula":299,"bolso":208,"br":7,"nu":16,"out":0}},"1112":{"ap":1011,"t1":{"lula":368,"bolso":301,"br":9,"nu":19,"out":55},"t2":{"lula":397,"bolso":343,"br":9,"nu":25,"out":0}},"1120":{"ap":1749,"t1":{"lula":751,"bolso":371,"br":34,"nu":44,"out":123},"t2":{"lula":819,"bolso":469,"br":21,"nu":43,"out":0}},"1139":{"ap":1173,"t1":{"lula":460,"bolso":312,"br":12,"nu":12,"out":76},"t2":{"lula":501,"bolso":376,"br":12,"nu":17,"out":0}},"1155":{"ap":1637,"t1":{"lula":572,"bolso":313,"br":32,"nu":29,"out":82},"t2":{"lula":641,"bolso":370,"br":13,"nu":35,"out":0}},"1163":{"ap":1426,"t1":{"lula":647,"bolso":357,"br":18,"nu":35,"out":99},"t2":{"lula":672,"bolso":426,"br":20,"nu":30,"out":0}},"1171":{"ap":1793,"t1":{"lula":763,"bolso":384,"br":33,"nu":62,"out":103},"t2":{"lula":822,"bolso":462,"br":20,"nu":53,"out":0}},"1180":{"ap":1167,"t1":{"lula":478,"bolso":333,"br":15,"nu":28,"out":74},"t2":{"lula":509,"bolso":383,"br":11,"nu":29,"out":0}},"1198":{"ap":450,"t1":{"lula":186,"bolso":116,"br":7,"nu":13,"out":35},"t2":{"lula":207,"bolso":130,"br":9,"nu":12,"out":0}},"1201":{"ap":877,"t1":{"lula":361,"bolso":244,"br":9,"nu":17,"out":48},"t2":{"lula":394,"bolso":258,"br":8,"nu":18,"out":0}},"1210":{"ap":2865,"t1":{"lula":1143,"bolso":752,"br":32,"nu":65,"out":203},"t2":{"lula":1235,"bolso":892,"br":20,"nu":57,"out":0}},"1228":{"ap":462,"t1":{"lula":179,"bolso":118,"br":8,"nu":10,"out":36},"t2":{"lula":199,"bolso":131,"br":6,"nu":14,"out":0}},"1236":{"ap":395,"t1":{"lula":159,"bolso":99,"br":4,"nu":6,"out":26},"t2":{"lula":170,"bolso":123,"br":3,"nu":8,"out":0}},"1244":{"ap":723,"t1":{"lula":365,"bolso":154,"br":6,"nu":19,"out":42},"t2":{"lula":391,"bolso":178,"br":6,"nu":16,"out":0}},"1252":{"ap":713,"t1":{"lula":384,"bolso":103,"br":20,"nu":24,"out":32},"t2":{"lula":416,"bolso":129,"br":8,"nu":10,"out":0}},"1260":{"ap":540,"t1":{"lula":290,"bolso":82,"br":5,"nu":14,"out":25},"t2":{"lula":298,"bolso":102,"br":3,"nu":11,"out":0}},"1279":{"ap":557,"t1":{"lula":291,"bolso":59,"br":13,"nu":9,"out":44},"t2":{"lula":312,"bolso":90,"br":17,"nu":10,"out":0}},"1287":{"ap":697,"t1":{"lula":336,"bolso":113,"br":5,"nu":16,"out":32},"t2":{"lula":358,"bolso":135,"br":5,"nu":8,"out":0}},"1317":{"ap":719,"t1":{"lula":292,"bolso":134,"br":8,"nu":18,"out":34},"t2":{"lula":279,"bolso":178,"br":10,"nu":16,"out":0}},"1333":{"ap":1172,"t1":{"lula":453,"bolso":366,"br":16,"nu":24,"out":67},"t2":{"lula":516,"bolso":425,"br":15,"nu":29,"out":0}},"1341":{"ap":1915,"t1":{"lula":831,"bolso":558,"br":22,"nu":39,"out":137},"t2":{"lula":886,"bolso":657,"br":22,"nu":38,"out":0}},"1350":{"ap":2031,"t1":{"lula":965,"bolso":529,"br":34,"nu":30,"out":109},"t2":{"lula":998,"bolso":612,"br":22,"nu":29,"out":0}},"1368":{"ap":363,"t1":{"lula":168,"bolso":101,"br":9,"nu":9,"out":30},"t2":{"lula":173,"bolso":113,"br":8,"nu":17,"out":0}},"1376":{"ap":328,"t1":{"lula":137,"bolso":94,"br":6,"nu":10,"out":16},"t2":{"lula":145,"bolso":105,"br":6,"nu":10,"out":0}},"1384":{"ap":507,"t1":{"lula":215,"bolso":151,"br":7,"nu":10,"out":41},"t2":{"lula":228,"bolso":185,"br":7,"nu":5,"out":0}},"1392":{"ap":602,"t1":{"lula":270,"bolso":161,"br":11,"nu":14,"out":33},"t2":{"lula":274,"bolso":201,"br":9,"nu":11,"out":0}},"1406":{"ap":313,"t1":{"lula":126,"bolso":97,"br":4,"nu":2,"out":19},"t2":{"lula":134,"bolso":108,"br":0,"nu":6,"out":0}},"1422":{"ap":232,"t1":{"lula":133,"bolso":51,"br":2,"nu":4,"out":6},"t2":{"lula":131,"bolso":60,"br":2,"nu":2,"out":0}},"1430":{"ap":168,"t1":{"lula":97,"bolso":36,"br":1,"nu":2,"out":6},"t2":{"lula":110,"bolso":37,"br":0,"nu":0,"out":0}},"1449":{"ap":1277,"t1":{"lula":300,"bolso":155,"br":14,"nu":22,"out":22},"t2":{"lula":307,"bolso":190,"br":4,"nu":18,"out":0}},"1465":{"ap":319,"t1":{"lula":139,"bolso":82,"br":6,"nu":12,"out":16},"t2":{"lula":147,"bolso":96,"br":3,"nu":11,"out":0}},"1511":{"ap":730,"t1":{"lula":339,"bolso":201,"br":7,"nu":9,"out":46},"t2":{"lula":348,"bolso":246,"br":4,"nu":8,"out":0}},"1520":{"ap":1172,"t1":{"lula":511,"bolso":297,"br":27,"nu":34,"out":71},"t2":{"lula":566,"bolso":344,"br":22,"nu":31,"out":0}},"1538":{"ap":1693,"t1":{"lula":900,"bolso":321,"br":33,"nu":44,"out":96},"t2":{"lula":921,"bolso":433,"br":20,"nu":40,"out":0}},"1546":{"ap":699,"t1":{"lula":367,"bolso":164,"br":16,"nu":14,"out":39},"t2":{"lula":370,"bolso":202,"br":12,"nu":13,"out":0}},"1554":{"ap":1359,"t1":{"lula":595,"bolso":338,"br":12,"nu":35,"out":95},"t2":{"lula":623,"bolso":407,"br":18,"nu":36,"out":0}},"1570":{"ap":0,"t1":{"lula":392,"bolso":242,"br":19,"nu":22,"out":62},"t2":{"lula":430,"bolso":286,"br":11,"nu":25,"out":0}},"1589":{"ap":248,"t1":{"lula":146,"bolso":9,"br":2,"nu":4,"out":9},"t2":{"lula":168,"bolso":12,"br":2,"nu":1,"out":0}},"1600":{"ap":414,"t1":{"lula":69,"bolso":62,"br":4,"nu":3,"out":9},"t2":{"lula":84,"bolso":66,"br":3,"nu":2,"out":0}},"1619":{"ap":196,"t1":{"lula":115,"bolso":36,"br":3,"nu":2,"out":21},"t2":{"lula":126,"bolso":52,"br":1,"nu":2,"out":0}},"1627":{"ap":80,"t1":{"lula":35,"bolso":20,"br":3,"nu":1,"out":7},"t2":{"lula":38,"bolso":24,"br":2,"nu":1,"out":0}},"1635":{"ap":173,"t1":{"lula":104,"bolso":33,"br":3,"nu":1,"out":13},"t2":{"lula":109,"bolso":40,"br":3,"nu":3,"out":0}}}}</script>
+<script>
+(function(){
+const D=JSON.parse(document.getElementById('data').textContent);
+const AGES=['16–17','18–24','25–34','35–44','45–59','60–69','70+'];
+const CANDS=[['lula','Lula','13 · PT','var(--lula)'],['flav','Flávio Bolsonaro','22 · PL','var(--flav)'],['cury','Augusto Cury','70','var(--other)'],['renan','Renan Santos','14','var(--other)'],['caiado','Ronaldo Caiado','55','var(--other)'],['zema','Romeu Zema','30','var(--other)'],['out','Outros 6 candidatos','','var(--other)']];
+const F=['ap','co','lula','flav','cury','renan','caiado','zema','out','br','nu','fem','mas'];
+const fmt=n=>Math.round(n).toLocaleString('pt-BR');
+const pc=(a,b,d=1)=>b?(a/b*100).toFixed(d).replace('.',',')+'%':'—';
+const pp=x=>{const r=Math.round(x*10)/10;return (r>0?'+':r<0?'−':'')+Math.abs(r).toFixed(1).replace('.',',')};
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const CAPS=new Set(['E.E.','E.M.','E.','M.','IF','INSS','CEMIG','APAE','EBCT','CAPS','CEFEC','C.M.','J.','SD','II','E.B.']);
+const LOW=new Set(['de','da','do','dos','das','e','à','a','às']);
+function nice(s){return s.split(/\s+/).map((w,i)=>{if(CAPS.has(w))return w;const l=w.toLocaleLowerCase('pt-BR');if(i>0&&LOW.has(l))return l;return l.replace(/(^|[(\-])(\p{L})/gu,(m,a,b)=>a+b.toLocaleUpperCase('pt-BR'))}).join(' ')}
+const niceB=b=>b.replace(/\b(Do|Da|De|Dos|Das)\b/g,m=>m.toLowerCase());
+
+// índices
+const LOC={};D.locais.forEach(l=>{l.nm=nice(l.nome);l.secs=[];LOC[l.id]=l});
+D.secs.forEach(s=>{LOC[s.l].secs.push(s);s.bairro=LOC[s.l].bairro});
+function sum(list){const o={n:list.length,age:[0,0,0,0,0,0,0]};F.forEach(k=>o[k]=0);list.forEach(s=>{F.forEach(k=>o[k]+=s[k]);s.age.forEach((v,i)=>o.age[i]+=v)});o.ab=o.ap-o.co;o.val=o.co-o.br-o.nu;o.disp=o.br+o.nu+o.cury+o.renan+o.caiado+o.zema+o.out;return o}
+D.locais.forEach(l=>{l.t=sum(l.secs)});
+const BAIRROS=[...new Set(D.locais.map(l=>l.bairro))].map(b=>({b,t:sum(D.secs.filter(s=>s.bairro===b))})).sort((a,b)=>b.t.ap-a.t.ap);
+const CITY=sum(D.secs);
+const AGMAP={};D.secs.forEach(s=>s.ag.forEach(a=>AGMAP[a]=s.s));
+
+// comparação 2022
+function v22(t){if(!t)return null;const val=t.lula+t.bolso+t.out;return {lula:t.lula,bolso:t.bolso,out:t.out,val,pl:t.lula/val*100,pb:t.bolso/val*100}}
+function c22For(scope,t){
+  if(scope.kind==='secao')return {msg:'Não dá pra comparar seção por seção: as seções mudam de lugar entre uma eleição e outra. Escolha um local ou bairro.'};
+  let c,ap22,label;
+  if(scope.kind==='cidade'){c=D.c22._cidade;ap22=c.t1.ap}
+  else if(scope.kind==='bairro'){c=D.c22[scope.bairro];ap22=c?c.t1.ap:0}
+  else {c=D.c22l[String(scope.local)];ap22=c?c.ap:0}
+  if(!c||!ap22)return {msg:'Este local não existia em 2022 com esse código, então não há comparação.'};
+  const ch=(t.ap-ap22)/ap22*100;
+  if(Math.abs(ch)>15)return {msg:`O número de eleitores aqui mudou ${ch>0?'+':''}${ch.toFixed(0)}% desde 2022 (seções foram transferidas). A comparação ficaria distorcida.`};
+  return {a:v22(c.t1),b:v22(c.t2),ch}
+}
+
+// estado
+const st={bairro:'',local:'',secao:'',idade:-1,sort:{k:'ap',d:-1}};
+const TABS=['lula','flavio','resultado','focar','virar'];
+try{const h=location.hash.replace('#','');if(TABS.includes(h))setTimeout(()=>showTab(h),0)}catch(e){}
+
+// filtros
+const fB=document.getElementById('f-bairro'),fL=document.getElementById('f-local'),fS=document.getElementById('f-secao');
+function opts(sel,list,val){sel.innerHTML='';list.forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;sel.appendChild(o)});sel.value=val}
+function fillFilters(){
+  opts(fB,[['','Todos os bairros']].concat(BAIRROS.map(x=>[x.b,`${niceB(x.b)} (${fmt(x.t.ap)} eleitores)`])),st.bairro);
+  const ls=D.locais.filter(l=>!st.bairro||l.bairro===st.bairro).sort((a,b)=>a.nm.localeCompare(b.nm,'pt-BR'));
+  opts(fL,[['','Todos os locais']].concat(ls.map(l=>[String(l.id),l.nm])),String(st.local));
+  let ss=D.secs.filter(s=>(!st.bairro||s.bairro===st.bairro)&&(!st.local||s.l==st.local));
+  const so=[];ss.slice().sort((a,b)=>a.s-b.s).forEach(s=>{so.push([String(s.s),`Seção ${s.s} · ${LOC[s.l].nm}`]);s.ag.forEach(a=>so.push([String(s.s),`Seção ${a} (vota junto com a ${s.s})`]))});
+  so.sort((a,b)=>parseInt(a[1].slice(6))-parseInt(b[1].slice(6)));
+  opts(fS,[['','Todas as seções']].concat(so),String(st.secao));
+}
+fB.addEventListener('change',()=>{st.bairro=fB.value;st.local='';st.secao='';render()});
+fL.addEventListener('change',()=>{st.local=fL.value?+fL.value:'';if(st.local)st.bairro=LOC[st.local].bairro;st.secao='';render()});
+fS.addEventListener('change',()=>{st.secao=fS.value?+fS.value:'';if(st.secao){const s=D.secs.find(x=>x.s===st.secao);st.local=s.l;st.bairro=s.bairro}render()});
+document.getElementById('limpar').addEventListener('click',()=>{st.bairro='';st.local='';st.secao='';st.idade=-1;render()});
+const fI=document.getElementById('f-idade');
+[['-1','Todas']].concat(AGES.map((a,i)=>[String(i),a+(i===6||i===0?' (opcional)':'')])).forEach(([v,t])=>{const b=el('button','chip',esc(t));b.type='button';b.dataset.v=v;b.addEventListener('click',()=>{st.idade=+v;render()});fI.appendChild(b)});
+
+function scopeOf(){
+  if(st.secao){const s=D.secs.find(x=>x.s===st.secao);return {kind:'secao',list:[s],label:`Seção ${s.s}${s.ag.length?' (+ '+s.ag.join(', ')+')':''} · ${LOC[s.l].nm}`,sub:LOC[s.l].end}}
+  if(st.local){const l=LOC[st.local];return {kind:'local',local:l.id,list:l.secs,label:l.nm,sub:`${l.end} · ${niceB(l.bairro)} · ${l.secs.length} ${l.secs.length>1?'seções':'seção'}`}}
+  if(st.bairro){const ls=D.secs.filter(s=>s.bairro===st.bairro);const nl=new Set(ls.map(s=>s.l)).size;return {kind:'bairro',bairro:st.bairro,list:ls,label:`Bairro ${niceB(st.bairro)}`,sub:`${nl} ${nl>1?'locais':'local'} · ${ls.length} seções`}}
+  return {kind:'cidade',list:D.secs,label:'Cidade inteira',sub:`${D.locais.length} locais · ${D.secs.length} seções`}
+}
+
+function bars(host,rows,max){host.innerHTML='';rows.forEach(r=>{const b=el('div','bar'+(r.sel?' sel':''));b.innerHTML=`<div class="lab">${esc(r.lab)}${r.sub?`<small>${esc(r.sub)}</small>`:''}</div><div class="tr"><div class="fill" style="width:${max?Math.max(0.5,r.v/max*100):0}%;background:${r.c||'var(--other)'}"></div></div><div class="val">${r.val}${r.vs?`<small>${r.vs}</small>`:''}</div>`;host.appendChild(b)})}
+
+function render(){
+  fillFilters();
+  [...fI.children].forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.v===st.idade)));
+  const sc=scopeOf(),t=sum(sc.list);
+  document.getElementById('scope').textContent=sc.label;
+  document.getElementById('limpar').hidden=!(st.bairro||st.local||st.secao||st.idade>=0);
+  // KPIs
+  const K=document.getElementById('kpis');K.innerHTML='';
+  const kp=[['Eleitores',fmt(t.ap),sc.sub],['Votaram',fmt(t.co),pc(t.co,t.ap)+' dos eleitores'],['Não votaram',fmt(t.ab),pc(t.ab,t.ap)+' dos eleitores',true],['Brancos',fmt(t.br),pc(t.br,t.co)+' dos votos'],['Nulos',fmt(t.nu),pc(t.nu,t.co)+' dos votos']];
+  kp.forEach(([k,v,s,hot])=>{K.appendChild(el('div','kpi'+(hot?' hot':''),`<div class="k">${k}</div><div class="v">${v}</div><div class="s">${esc(s)}</div>`))});
+  // candidatos
+  const cr=CANDS.map(([k,n,num,c])=>({lab:n,sub:num,v:t[k],c,val:pc(t[k],t.val),vs:fmt(t[k])}));
+  bars(document.getElementById('cand'),cr,Math.max(...cr.map(r=>r.v)));
+  const d=t.lula-t.flav;
+  document.getElementById('diff').innerHTML=d>=0?`Lula na frente por <b>${fmt(d)} votos</b>. Brancos, nulos e outros candidatos somam <b>${fmt(t.disp)}</b>.`:`Flávio na frente por <b>${fmt(-d)} votos</b>. Brancos, nulos e outros candidatos somam <b>${fmt(t.disp)}</b>.`;
+  // 2022
+  const C=document.getElementById('cmp');C.innerHTML='';const cmp=c22For(sc,t);
+  if(cmp.msg){C.appendChild(el('div','note',esc(cmp.msg)))}else{
+    const now={pl:t.lula/t.val*100,pb:t.flav/t.val*100,lula:t.lula,bolso:t.flav};
+    [['2022','1º turno',cmp.a],['2022','2º turno',cmp.b],['2026','1º turno',now]].forEach(([y,tu,x])=>{
+      const po=Math.max(0,100-x.pl-x.pb);
+      const r=el('div','cmprow',`<div class="t">${y}<small>${tu}</small></div><div><div class="stack" role="img" aria-label="Lula ${x.pl.toFixed(1)}%, adversário ${x.pb.toFixed(1)}%"><span style="width:${x.pl}%;background:var(--lula)"></span>${po>0.2?`<span style="width:${po}%;background:var(--other)"></span>`:''}<span style="width:${x.pb}%;background:var(--flav)"></span></div><div class="lg"><span>Lula ${x.pl.toFixed(1).replace('.',',')}% · ${fmt(x.lula)}</span><span>${fmt(x.bolso)} · ${x.pb.toFixed(1).replace('.',',')}%</span></div></div>`);
+      C.appendChild(r)});
+    const dl=now.pl-cmp.a.pl,dv=t.lula-cmp.a.lula,dv2=cmp.b.lula-t.lula;
+    C.appendChild(el('div','note',`Lula aqui: <span class="${dl<0?'down':'up'}">${pp(dl)} pontos</span> e ${dv<0?'<b>'+fmt(-dv)+' votos a menos</b>':'<b>'+fmt(dv)+' votos a mais</b>'} que no 1º turno de 2022. ${dv2>0?`Pra repetir o 2º turno de 2022, faltam <b>${fmt(dv2)} votos</b>.`:'Já passou o 2º turno de 2022.'}${Math.abs(cmp.ch)>3?` <span style="color:var(--muted)">(Eleitores mudaram ${cmp.ch>0?'+':''}${cmp.ch.toFixed(0)}%.)</span>`:''}`));
+  }
+  // idade
+  const at=t.age.reduce((a,b)=>a+b,0);
+  const ar=AGES.map((a,i)=>({lab:a+' anos',v:t.age[i],c:i===st.idade?'var(--red)':'var(--ink2)',val:fmt(t.age[i]),vs:pc(t.age[i],at,0),sel:i===st.idade}));
+  bars(document.getElementById('ages'),ar,Math.max(...t.age));
+  const AN=document.getElementById('age-note');
+  if(st.idade>=0){const [ap,ab]=D.absAge[st.idade];AN.innerHTML=`<b>${fmt(t.age[st.idade])}</b> eleitores de ${AGES[st.idade]} anos votam ${sc.kind==='cidade'?'na cidade':'aqui'} (${pc(t.age[st.idade],at)}). Na cidade inteira, <b>${pc(ab,ap,0)}</b> dessa idade não votaram no 1º turno (${fmt(ab)} pessoas).${st.idade===6||st.idade===0?' Pra essa idade o voto é opcional.':''}`}
+  else{AN.innerHTML=`Quem mais faltou na cidade: <b>70+ anos (58%)</b> e <b>25–34 anos (23%)</b>. Toque numa idade acima pra ver os detalhes. Esse dado de quem faltou só existe para a cidade inteira.`}
+  // sexo
+  const SX=document.getElementById('sexo'),tot=t.fem+t.mas;
+  SX.innerHTML=`<div class="stack" style="height:28px" role="img" aria-label="Mulheres ${pc(t.fem,tot)}, homens ${pc(t.mas,tot)}"><span style="width:${t.fem/tot*100}%;background:var(--red)"></span><span style="width:${t.mas/tot*100}%;background:var(--ink2)"></span></div><div class="lg cmprow" style="display:flex;justify-content:space-between;margin-top:6px;font-size:14px"><span><b>Mulheres</b> ${fmt(t.fem)} · ${pc(t.fem,tot)}</span><span>${pc(t.mas,tot)} · ${fmt(t.mas)} <b>Homens</b></span></div>`;
+  const [fa,fb]=D.absSex.FEMININO,[ma,mb]=D.absSex.MASCULINO;
+  document.getElementById('sexo-note').innerHTML=`Na cidade, <b>${pc(fb,fa)}</b> das mulheres e <b>${pc(mb,ma)}</b> dos homens não votaram no 1º turno. Entre os 70+, ${fmt(D.absAgeF[6][1])} mulheres faltaram.`;
+  table(sc);
+}
+
+// tabela
+function table(sc){
+  const T=document.getElementById('tbl');const bySec=sc.kind==='local'||sc.kind==='secao';
+  document.getElementById('tbl-title').textContent=bySec?'Seções deste local':'Locais de votação';
+  document.getElementById('tbl-hint').textContent=bySec?'Toque no título da coluna pra ordenar.':'Toque num local pra ver as seções dele. Toque no título da coluna pra ordenar.';
+  let rows;
+  if(bySec){rows=LOC[sc.kind==='local'?sc.local:sc.list[0].l].secs.map(s=>{const t=sum([s]);return {key:s.s,name:`Seção ${s.s}`,sub:s.ag.length?'+ seções '+s.ag.join(', '):'',t,d22:null,sel:s.s===st.secao}})}
+  else{rows=D.locais.filter(l=>!st.bairro||l.bairro===st.bairro).map(l=>{const c=c22For({kind:'local',local:l.id},l.t);return {key:l.id,name:l.nm,sub:niceB(l.bairro),t:l.t,d22:c.a?l.t.lula/l.t.val*100-c.a.pl:null}})}
+  const cols=[['name',bySec?'Seção':'Local',''],['ap','Eleitores','n'],['lp','Lula','n'],['fp','Flávio','n'],['abp','Faltaram','n'],['disp','Br+Nu+Outros','n']];
+  if(st.idade>=0)cols.push(['ag',AGES[st.idade]+' anos','n']);
+  if(!bySec)cols.push(['d22','Lula x 2022','n']);
+  rows.forEach(r=>{const t=r.t;r.ap=t.ap;r.lp=t.lula/t.val*100;r.fp=t.flav/t.val*100;r.abp=t.ab/t.ap*100;r.disp=t.disp;r.ag=st.idade>=0?t.age[st.idade]:0});
+  const {k,d}=st.sort;const kk=cols.some(c=>c[0]===k)?k:'ap';
+  rows.sort((a,b)=>{const x=a[kk],y=b[kk];if(kk==='name')return d*String(x).localeCompare(String(y),'pt-BR',{numeric:true});if(x==null)return 1;if(y==null)return -1;return d*(x-y)});
+  let h='<thead><tr>'+cols.map(([c,lab,cl])=>`<th class="${cl}" ${c===kk?`aria-sort="${d>0?'ascending':'descending'}"`:''}><button type="button" data-k="${c}">${esc(lab)}${c===kk?(d>0?' ▲':' ▼'):''}</button></th>`).join('')+'</tr></thead><tbody>';
+  rows.forEach(r=>{h+=`<tr class="${bySec?'':'click'}" data-id="${r.key}"${r.sel?' style="font-weight:700"':''}><td class="loc"><b>${esc(r.name)}</b>${r.sub?`<small>${esc(r.sub)}</small>`:''}</td><td class="n">${fmt(r.ap)}</td><td class="n">${pc(r.t.lula,r.t.val)}</td><td class="n">${pc(r.t.flav,r.t.val)}</td><td class="n">${pc(r.t.ab,r.t.ap,0)} <small style="color:var(--muted)">${fmt(r.t.ab)}</small></td><td class="n">${fmt(r.disp)}</td>${st.idade>=0?`<td class="n">${fmt(r.ag)}</td>`:''}${bySec?'':`<td class="n">${r.d22==null?'<span style="color:var(--muted)">—</span>':`<span class="${Math.round(r.d22*10)/10<0?'down':Math.round(r.d22*10)/10>0?'up':''}">${pp(r.d22)}</span>`}</td>`}</tr>`});
+  T.innerHTML=h+'</tbody>';
+  T.querySelectorAll('th button').forEach(b=>b.addEventListener('click',()=>{const c=b.dataset.k;st.sort={k:c,d:st.sort.k===c?-st.sort.d:(c==='name'?1:-1)};table(scopeOf())}));
+  if(!bySec)T.querySelectorAll('tr.click').forEach(tr=>tr.addEventListener('click',()=>{const id=+tr.dataset.id;st.local=id;st.bairro=LOC[id].bairro;st.secao='';render();document.getElementById('filtros').scrollIntoView({behavior:'smooth',block:'start'})}));
+}
+
+// onde focar
+const FACTS=[[fmt(CITY.lula-CITY.flav),'votos de vantagem do Lula sobre o Flávio no 1º turno'],[fmt(CITY.ab),'pessoas não votaram. Todas podem votar dia 25'],[fmt(CITY.disp),'votos em branco, nulo ou em outros candidatos'],[fmt(D.c22._cidade.t2.lula-CITY.lula),'votos que faltam pro Lula repetir o 2º turno de 2022 aqui']];
+const FH=document.getElementById('facts');FACTS.forEach(([n,t])=>FH.appendChild(el('div','fact',`<div class="big">${n}</div><p>${esc(t)}</p>`)));
+const METRICS=[
+ ['ab','Mais gente faltou',l=>l.t.ab,l=>`${fmt(l.t.ab)} <small>${pc(l.t.ab,l.t.ap,0)}</small>`,'Locais com mais eleitores que não votaram no 1º turno. Cada um deles pode votar dia 25.'],
+ ['d22','Lula caiu mais desde 2022',l=>{if(l.t.ap<300)return null;const c=c22For({kind:'local',local:l.id},l.t);return c.a?-(l.t.lula/l.t.val*100-c.a.pl):null},l=>{const c=c22For({kind:'local',local:l.id},l.t);return `${pp(l.t.lula/l.t.val*100-c.a.pl)} pts <small>${c.a.pl.toFixed(0)}% → ${(l.t.lula/l.t.val*100).toFixed(0)}%</small>`},'Queda do Lula em pontos percentuais, comparando com o 1º turno de 2022. Só locais com 300 eleitores ou mais e sem mudança grande de seções.'],
+ ['disp','Mais votos em disputa',l=>l.t.disp,l=>`${fmt(l.t.disp)} <small>${pc(l.t.disp,l.t.co,0)}</small>`,'Brancos, nulos e votos em outros candidatos (Cury, Renan, Caiado, Zema e os demais).'],
+ ['a70','Mais eleitores 70+',l=>l.t.age[6],l=>`${fmt(l.t.age[6])} <small>${pc(l.t.age[6],l.t.ap,0)}</small>`,'Onde votam mais pessoas com 70 anos ou mais. Na cidade, 58% delas não votaram. Ajude sua mãe, seu pai, sua avó a ir votar.'],
+ ['a18','Mais jovens 18–24',l=>l.t.age[1],l=>`${fmt(l.t.age[1])} <small>${pc(l.t.age[1],l.t.ap,0)}</small>`,'Onde votam mais jovens de 18 a 24 anos. Na cidade, 20% deles não votaram.']];
+let metric='ab';const RM=document.getElementById('rank-metric');
+METRICS.forEach(([id,lab])=>{const b=el('button','chip',esc(lab));b.type='button';b.dataset.v=id;b.addEventListener('click',()=>{metric=id;rank()});RM.appendChild(b)});
+function rank(){
+  [...RM.children].forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===metric)));
+  const m=METRICS.find(x=>x[0]===metric);document.getElementById('rank-hint').textContent=m[4];
+  const ls=D.locais.map(l=>({l,v:m[2](l)})).filter(x=>x.v!=null&&x.v>0).sort((a,b)=>b.v-a.v).slice(0,10);
+  const H=document.getElementById('rank');H.innerHTML='';const max=ls.length?ls[0].v:1;
+  ls.forEach(({l,v})=>{const b=el('button','row');b.type='button';b.innerHTML=`<div class="bar"><div class="lab">${esc(l.nm)}<small>${esc(niceB(l.bairro))}</small></div><div class="tr"><div class="fill" style="width:${v/max*100}%"></div></div><div class="val">${m[3](l)}</div></div>`;b.addEventListener('click',()=>{st.local=l.id;st.bairro=l.bairro;st.secao='';if(metric==='a70')st.idade=6;if(metric==='a18')st.idade=1;render();showTab('resultado');window.scrollTo({top:0,behavior:'smooth'})});H.appendChild(b)});
+}
+
+// mensagens
+const MSGS=[
+ ['Convite','Oi, [nome]! Dia 25 de outubro tem 2º turno pra presidente. Quem não votou no 1º turno pode votar normalmente. Bora votar? Eu vou de Lula, 13.'],
+ ['Pra família 70+','[Mãe/Vó], dia 25 tem eleição de novo. Pra senhora o voto é opcional, mas faz diferença. Quer que eu te leve pra votar?'],
+ ['Pra quem anulou','Sei que no 1º turno você não quis nenhum dos dois. Mas branco e nulo não entram na conta: quem decide são os outros. Posso te mostrar o que mudou aqui em Santos Dumont? Depois você decide.'],
+ ['Sábado, dia 24','Amanhã é dia 25, 2º turno! A votação vai das 8h às 17h. Leva documento com foto ou o e-Título. Lula, 13.']];
+const MH=document.getElementById('msgs');
+MSGS.forEach(([w,txt],i)=>{const box=el('div','msg');box.innerHTML=`<div class="when">${esc(w)}</div><textarea id="msg${i}" rows="4" aria-label="Mensagem: ${esc(w)}">${esc(txt)}</textarea><div class="btnrow"><button class="btn dark" type="button">Copiar</button><a class="btn ghost" target="_blank" rel="noopener">Abrir no WhatsApp</a></div>`;
+  const ta=box.querySelector('textarea'),cp=box.querySelector('button'),wa=box.querySelector('a');
+  const fit=()=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+'px'};const upd=()=>{wa.href='https://wa.me/?text='+encodeURIComponent(ta.value);fit()};ta.addEventListener('input',upd);
+  cp.addEventListener('click',()=>{const done=()=>{cp.textContent='Copiado';setTimeout(()=>cp.textContent='Copiar',1600)};try{navigator.clipboard.writeText(ta.value).then(done,()=>{ta.focus();ta.select();cp.textContent='Texto selecionado'})}catch(e){ta.focus();ta.select();cp.textContent='Texto selecionado'}});
+  MH.appendChild(box);upd()});
+window.addEventListener('resize',()=>MH.querySelectorAll('textarea').forEach(t=>{t.style.height='auto';t.style.height=t.scrollHeight+'px'}));
+function refit(){MH.querySelectorAll('textarea').forEach(t=>{t.style.height='auto';t.style.height=t.scrollHeight+'px'})}
+
+// abas
+function showTab(id){TABS.forEach(v=>{document.getElementById(v).hidden=v!==id;document.getElementById('t-'+v).setAttribute('aria-selected',String(v===id))});if(id==='virar')refit();try{history.replaceState(null,'','#'+id)}catch(e){}}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{showTab(b.id.slice(2));window.scrollTo({top:0})}));
+
+// contagem
+(function(){const n=new Date();const a=Date.UTC(n.getFullYear(),n.getMonth(),n.getDate()),b=Date.UTC(2026,9,25);const d=Math.round((b-a)/864e5);const c=document.getElementById('countdown');
+ c.textContent=d>1?`Faltam ${d} dias pro 2º turno · 25 de outubro`:d===1?'Amanhã é o 2º turno':d===0?'Hoje é o 2º turno':'2º turno: 25 de outubro'})();
+
+// argumentos (Por que Lula / Flávio)
+const P360='https://www.poder360.com.br/poder-eleicoes-2026/o-que-se-sabe-sobre-o-plano-economico-de-flavio-bolsonaro/';
+const BPM='https://bpmoney.com.br/politica/escala-6x1-quem-votou-contra-senadores/';
+const DIE='https://www.dieese.org.br/outraspublicacoes/2023/notaEspecialSM_2_042023.pdf';
+const ARGS={
+lula:[
+ {t:'Fim da escala 6x1',n:'75 x 1',x:'O Senado aprovou em 14/10 a PEC que acaba com a escala 6x1. A jornada cai de 44 pra 40 horas, aos poucos, com 2 folgas por semana e <b>sem cortar salário</b>. Proposta apoiada pelo governo Lula.',tags:['Trabalho'],f:[['Placar da votação, BPMoney (14/10/2026)',BPM],['Senado Notícias (14/10/2026)']]},
+ {t:'Imposto de Renda zero até R$ 5 mil',n:'R$ 5 mil',x:'Desde janeiro de 2026, quem ganha até R$ 5 mil por mês não paga Imposto de Renda. Quem ganha até R$ 7.350 paga menos. São mais de 15 milhões de pessoas no país.',tags:['Dinheiro no bolso','Trabalho'],f:[['Lei 15.270/2025']]},
+ {t:'Salário mínimo acima da inflação',n:'Lei',x:'A valorização do mínimo virou lei em 2023: todo ano ele sobe acima da inflação. De 2020 a 2022, no governo Bolsonaro, os reajustes saíram <b>praticamente sem aumento real</b>.',tags:['Trabalho','Aposentados','Dinheiro no bolso'],f:[['Lei 14.663/2023'],['DIEESE (2023)',DIE]]},
+ {t:'Desemprego perto do menor nível da história',n:'5,3%',x:'No trimestre até agosto de 2026, o desemprego ficou em 5,3%, o menor para esse período desde que o IBGE começou a medir, em 2012.',tags:['Trabalho','Economia'],f:[['IBGE, Pnad Contínua (29/09/2026), via Diário do Grande ABC','https://www.dgabc.com.br/Noticia/4349737/taxa-de-desemprego-no-brasil-e-a-menor-para-trimestre-ate-agosto-desde-2012-mostra-ibge']]},
+ {t:'Brasil fora do Mapa da Fome',n:'2025',x:'Em 2025, a ONU tirou o Brasil do Mapa da Fome pela segunda vez. A primeira foi em 2014, também num governo do PT. O país tinha voltado ao mapa no relatório de 2022.',tags:['Família'],f:[['FAO/ONU, relatórios SOFI de 2014, 2022 e 2025']]},
+ {t:'Remédio de graça na Farmácia Popular',n:'12.149',x:'Desde fevereiro de 2025, os 41 remédios da Farmácia Popular são de graça, como os de pressão, diabetes e asma. Em Santos Dumont, <b>12.149 pessoas</b> usaram o programa em 2025.',tags:['Saúde','Aposentados'],sd:1,f:[['Ministério da Saúde (via Casa 13)']]},
+ {t:'Bolsa Família em Santos Dumont',n:'2.765',x:'Famílias daqui recebem o Bolsa Família em 2026. <b>1.288 crianças</b> de até 6 anos ganham R$ 150 a mais por mês. É dinheiro que gira no comércio da cidade.',tags:['Família','Dinheiro no bolso'],sd:1,f:[['MDS (via Casa 13), dados até maio de 2026']]},
+ {t:'Dinheiro do INSS na cidade',n:'R$ 330,8 mi',x:'Foi quanto o INSS pagou em aposentadorias, pensões e outros benefícios em Santos Dumont em 2025. Com o mínimo subindo acima da inflação, quem ganha o piso também ganha mais.',tags:['Aposentados','Dinheiro no bolso'],sd:1,f:[['Ministério da Previdência (via Casa 13)']]},
+ {t:'Pé-de-Meia',n:'815',x:'Alunos do ensino médio público de Santos Dumont recebem o Pé-de-Meia em 2026, uma poupança pra continuar estudando. Já são <b>R$ 4,6 milhões</b> pagos aqui desde 2024.',tags:['Educação','Família'],sd:1,f:[['MEC (via Casa 13), dados até abril de 2026']]},
+ {t:'R$ 9,6 milhões pra educação daqui',n:'R$ 9,6 mi',x:'Repasses federais pra Santos Dumont desde 2023: Pé-de-Meia R$ 4,6 mi, merenda R$ 1,8 mi, livros didáticos R$ 1,6 mi, escola em tempo integral R$ 775 mil, dinheiro direto na escola R$ 557 mil e transporte escolar R$ 231 mil.',tags:['Educação'],sd:1,f:[['MEC (via Casa 13)']]},
+ {t:'Cesta básica sem imposto',n:'0%',x:'A reforma tributária aprovada no governo Lula zera os impostos sobre os alimentos da cesta básica nacional, com transição até 2033.',tags:['Dinheiro no bolso','Família'],f:[['Lei Complementar 214/2025']]},
+ {t:'Bets proibidas',n:'MP',x:'Em setembro de 2026, Lula assinou a medida provisória que proíbe as bets no Brasil. Quem tinha saldo nas plataformas recebe o dinheiro de volta.',tags:['Família','Dinheiro no bolso'],f:[['Agência Brasil (09/2026)','https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/mp-proibe-bets-no-brasil-e-determina-devolucao-de-saldo-ao-apostador']]},
+ {t:'MEI: teto maior e dívida perdoada',n:'R$ 140 mil',x:'O governo mandou ao Congresso, em 13/10, a proposta de subir o teto do MEI pra R$ 110 mil em 2027 e R$ 140 mil em 2028, e de perdoar dívidas de 3,6 milhões de MEIs. Santos Dumont tem <b>2.753 MEIs</b>.',tags:['Trabalho','Economia'],sd:1,f:[['Governo federal (13/10/2026); Casa 13']]},
+ {t:'Carteira de motorista mais barata',n:'até 80%',x:'Segundo o governo, as novas regras de dezembro de 2025 deixaram a CNH até 80% mais barata.',tags:['Dinheiro no bolso','Trabalho'],f:[['Governo federal (12/2025)']]}
+],
+flavio:[
+ {t:'Trabalho pago por hora',n:'PEC 12',x:'Ele votou pelo fim da 6x1, mas assina e defende a PEC 12/2026, do coordenador da campanha dele. Ela cria o pagamento por hora trabalhada, com salário e direitos proporcionais às horas e <b>sem garantia de 2 dias de descanso</b> por semana.',q:'“Quem quer trabalhar mais, vai trabalhar mais.” (Flávio, 06/10/2026)',tags:['Trabalho'],f:[['Congresso em Foco (06/10/2026)','https://www.congressoemfoco.com.br/noticia/123034/flavio-defende-trabalho-por-hora-como-alternativa-ao-fim-da-escala-6x1'],['Votação da 6x1, BPMoney (14/10/2026)',BPM]]},
+ {t:'Mexer de novo na aposentadoria e na CLT',n:'',x:'O coordenador da campanha, senador Rogério Marinho, disse que vai “revisitar” a Previdência e a reforma trabalhista. Flávio promete manter o reajuste das aposentadorias acima da inflação, mas não explicou o que mudaria na Previdência.',q:'“A gente vai ter que revisitar a Previdência.” “A trabalhista tem que ser revisitada.” (Rogério Marinho, março de 2026)',tags:['Aposentados','Trabalho'],f:[['Gazeta do Povo, entrevista à Folha (06/03/2026)','https://www.gazetadopovo.com.br/republica/flavio-bolsonaro-nova-reforma-previdencia-retomar-trabalhista/'],['Poder360 (13/10/2026)',P360]]},
+ {t:'Prioridade: perdoar o pai',n:'27 anos',x:'Jair Bolsonaro foi condenado pelo STF em 2025 a 27 anos de prisão por liderar a tentativa de golpe. Flávio promete anistia “ampla, geral e irrestrita” e, se não sair, um indulto ao pai.',q:'Sobre o julgamento do pai: “uma grande farsa”.',tags:['Democracia'],f:[['Euronews, entrevista à TV Globo (29/08/2026)','https://pt.euronews.com/2026/08/29/filho-de-bolsonaro-insiste-que-julgamento-do-pai-foi-uma-farsa-e-que-lhe-concedera-um-indu']]},
+ {t:'Corte de gastos sem dizer onde',n:'?',x:'O plano promete um “tesouraço” de corte de gastos, mas não diz quanto, onde, nem se atinge benefícios sociais. Um assessor econômico da campanha apresentou corte de até R$ 250 bilhões no Orçamento. A campanha diz que essa não é a posição oficial.',tags:['Economia','Dinheiro no bolso'],f:[['Poder360 (13/10/2026)',P360]]},
+ {t:'Rever a reforma tributária',n:'',x:'O plano registrado no TSE propõe rever a reforma tributária aprovada no governo Lula, sem dizer qual seria a nova alíquota. É essa reforma que zera o imposto da cesta básica.',tags:['Dinheiro no bolso','Economia'],f:[['Poder360 (13/10/2026)',P360],['Lei Complementar 214/2025']]},
+ {t:'Privatizar ou não?',n:'',x:'O plano no TSE prevê retomar o Programa Nacional de Desestatização, sem listar empresas. Dias depois, o coordenador econômico Adolfo Sachsida disse que “não existirão privatizações de empresas”. Qual dos dois vale?',tags:['Economia'],f:[['Poder360 (13/10/2026)',P360],['Forbes Brasil (08/10/2026)','https://forbes.com.br/forbes-money/2026/10/petrobras-bb-e-caixa-serao-privatizados-veja-o-que-diz-coordenador-de-flavio-bolsonaro/']]},
+ {t:'Prontuário do SUS com hospital privado',n:'',x:'O plano propõe compartilhar os prontuários dos pacientes do SUS, com os dados pessoais, com hospitais privados.',tags:['Saúde'],f:[['Agência Brasil (18/09/2026)','https://agenciabrasil.ebc.com.br/politica/noticia/2026-09/flavio-bolsonaro-propoe-enxugar-estado-e-endurecer-acoes-de-seguranca']]},
+ {t:'O governo que ele defende',n:'',x:'No governo Bolsonaro, o salário mínimo teve reajustes praticamente sem aumento real de 2020 a 2022, e o Brasil voltou ao Mapa da Fome da ONU no relatório de 2022.',tags:['Dinheiro no bolso','Família'],f:[['DIEESE (2023)',DIE],['FAO/ONU, relatório SOFI de 2022']]}
+]};
+const BOATOS=[
+ ['f','“Flávio vai acabar com o Bolsa Família.”','O plano dele diz que mantém os programas sociais.'],
+ ['f','“Vai acabar com o 13º, as férias e a CLT.”','O plano não propõe isso. O que existe é a PEC do trabalho por hora, com direitos proporcionais às horas.'],
+ ['f','“Vai acabar com a aposentadoria.”','Não está no plano. O que existe é a fala do coordenador sobre “revisitar” a Previdência.'],
+ ['f','“Votou contra o fim da 6x1.”','Votou a favor, nos dois turnos.'],
+ ['n','“Vai vender a Petrobras.”','O plano não cita a Petrobras. Fala em privatizações sem dizer quais.']];
+const norm=s=>String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+const strip=h=>{const d=document.createElement('div');d.innerHTML=h;return d.textContent};
+function copyText(btn,txt){const done=()=>{btn.textContent='Copiado';setTimeout(()=>btn.textContent='Copiar',1600)};try{navigator.clipboard.writeText(txt).then(done,()=>{btn.textContent='Não deu pra copiar'})}catch(e){btn.textContent='Não deu pra copiar'}}
+function argsSetup(k){
+  const list=ARGS[k],st2={tag:'Todos',q:''};
+  const tags=['Todos'];if(list.some(a=>a.sd))tags.push('Santos Dumont');list.forEach(a=>a.tags.forEach(t=>{if(!tags.includes(t))tags.push(t)}));
+  const TG=document.getElementById('tags-'+k),Q=document.getElementById('q-'+k),H=document.getElementById('args-'+k),C=document.getElementById('count-'+k);
+  tags.forEach(t=>{const b=el('button','chip',esc(t));b.type='button';b.dataset.v=t;b.addEventListener('click',()=>{st2.tag=t;draw()});TG.appendChild(b)});
+  Q.addEventListener('input',()=>{st2.q=Q.value;draw()});
+  function draw(){
+    [...TG.children].forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===st2.tag)));
+    const q=norm(st2.q.trim());
+    const vis=list.filter(a=>(st2.tag==='Todos'||(st2.tag==='Santos Dumont'?a.sd:a.tags.includes(st2.tag)))&&(!q||q.split(/\s+/).every(w=>norm(a.t+' '+strip(a.x)+' '+(a.q||'')+' '+a.tags.join(' ')+(a.sd?' santos dumont':'')).includes(w))));
+    C.textContent=vis.length===list.length?`${list.length} ${k==='lula'?'argumentos':'fatos'}`:`${vis.length} de ${list.length}`;
+    H.innerHTML='';
+    if(!vis.length){H.appendChild(el('div','empty','Nada encontrado. Tente outra palavra ou toque em <b>Todos</b>.'));return}
+    vis.forEach(a=>{
+      const c=el('article','arg');
+      const fonte=a.f.map(([l,u])=>u?`<a href="${u}" target="_blank" rel="noopener">${esc(l)}</a>`:esc(l)).join(' · ');
+      c.innerHTML=`<div class="top"><h3>${esc(a.t)}</h3>${a.n?`<div class="num">${esc(a.n)}</div>`:''}</div><p>${a.x}</p>${a.q?`<blockquote>${esc(a.q)}</blockquote>`:''}<div class="tags">${a.sd?'<span class="tag sd">Santos Dumont</span>':''}${a.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div><div class="fonte">Fonte: ${fonte}</div><div class="btnrow"><button class="btn dark" type="button">Copiar</button><a class="btn ghost" target="_blank" rel="noopener">Mandar no WhatsApp</a></div>`;
+      const txt=`*${a.t}*\n${strip(a.x)}${a.q?'\n'+a.q:''}\nFonte: ${a.f.map(x=>x[0]).join('; ')}`+(k==='lula'?'\n\nDia 25, é Lula 13.':'');
+      c.querySelector('a.btn').href='https://wa.me/?text='+encodeURIComponent(txt);
+      const b=c.querySelector('button');b.addEventListener('click',()=>copyText(b,txt));
+      H.appendChild(c)});
+  }
+  draw();
+}
+argsSetup('lula');argsSetup('flavio');
+(function(){const B=document.getElementById('boatos');BOATOS.forEach(([k,a,b])=>B.appendChild(el('div','boato',`<b class="${k}">${k==='f'?'FALSO':'NÃO CONSTA'}</b><div><b>${esc(a)}</b><br>${esc(b)}</div>`)))})();
+
+// galeria
+function gal(id,items,ext){const g=document.getElementById(id);items.forEach(([f,alt])=>{const a=el('a');a.href=''+f+'.'+(ext||'jpg');a.target='_blank';a.rel='noopener';a.innerHTML=`<img src="t-${f}.${ext||'jpg'}" alt="${esc(alt)}" loading="lazy">`;g.appendChild(a)})}
+gal('gal-kit',[['kit-1','Não votou no 1º turno? Pode votar'],['kit-2','Imposto de Renda: ganha até R$ 5 mil não paga'],['kit-3','Farmácia Popular: 12.149 pessoas daqui'],['kit-4','Bolsa Família: 2.765 famílias daqui'],['kit-5','INSS: R$ 330,8 milhões pagos aqui'],['kit-6','Pé-de-Meia: 815 alunos daqui'],['kit-7','Direitos do trabalhador: o que tá em jogo'],['kit-8','R$ 9,6 milhões pra educação daqui'],['kit-9','Travou na conversa? Me chama']]);
+gal('gal-conq',[1,2,3,4,5,6,7,8,9,10].map(i=>['conquista-'+String(i).padStart(2,'0'),'Conquista '+i+' do governo Lula']));
+gal('gal-q',[['quadro-idade-sexo','Quadro: quem não foi votar, por sexo e idade','png'],['quadro-brancos-nulos','Quadro: brancos, nulos e outros candidatos','png']].map(x=>x.slice(0,2)),'png');
+(function(){const g=document.getElementById('gal-q');const a=el('a');a.href='pedir-voto.jpg';a.target='_blank';a.rel='noopener';a.innerHTML='<img src="t-pedir-voto.jpg" alt="Já pediu um voto hoje?" loading="lazy">';g.appendChild(a)})();
+
+render();rank();
+})();
+</script>
+
+</body>
+</html>
